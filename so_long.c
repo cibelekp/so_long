@@ -6,7 +6,7 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 10:58:55 by ckojima-          #+#    #+#             */
-/*   Updated: 2023/08/15 18:43:25 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/15 19:57:45 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,29 +39,44 @@ int	check_args(int ac, char *av)
 	return (0);
 }
 
-void	map_matrix(int map_fd)
+void	map_matrix_rec(int nrow)
 {
-	char	*map_row;
-	int		rows;
+	char	*map_rows;
 
-	map_row = NULL;
-	rows = 0;
-	map()->matrix = (char **)malloc(sizeof(char *) * (rows + 1));
-	while ((map_row = get_next_line(map_fd)) != NULL)
+	map_rows = get_next_line(map()->fd);
+	if (map_rows)
+		map_matrix_rec(nrow + 1);
+	else
 	{
-		map()->matrix[rows] = map_row;
-		ft_printf("map.matrix[%d] %s", rows, map()->matrix[rows]);
-		rows++;
+		map()->matrix = (char **)malloc(sizeof(char *) * (nrow + 1));
+		map()->height = nrow;
 	}
-	map()->matrix[rows] = NULL;
-	ft_printf("\nmap.matrix[%d] %s", rows, map()->matrix[rows]);
-	map()->height = rows;
-	ft_printf("\nmap.height = %d\n", map()->height);
+	map()->matrix[nrow] = map_rows;
 }
+
+// void	map_matrix(int map_fd)
+// {
+// 	int	rows;
+
+// 	rows = 0;
+// 	map()->matrix = (char **)malloc(sizeof(char *) * (6 + 1));
+// 	// find number of rows
+// 	while (1)
+// 	{
+// 		map()->matrix[rows] = get_next_line(map_fd);
+// 		if (map()->matrix[rows] == NULL)
+// 			break ;
+// 		ft_printf("map.matrix[%d] %s", rows, map()->matrix[rows]);
+// 		rows++;
+// 	}
+// 	close(map_fd);
+// 	ft_printf("\nmap.matrix[%d] %s", rows, map()->matrix[rows]);
+// 	map()->height = rows;
+// 	ft_printf("\nmap.height = %d\n", map()->height);
+// }
 
 int	main(int ac, char **av)
 {
-	int	map_fd;
 	int	x;
 
 	if (check_args(ac, av[1]) != 0)
@@ -69,23 +84,18 @@ int	main(int ac, char **av)
 		ft_printf("Call exit_program.\n");
 		return (-1);
 	}
-	map_fd = open(av[1], O_RDONLY);
-	if (map_fd < 0)
+	map()->fd = open(av[1], O_RDONLY);
+	if (map()->fd < 0)
 		perror("Error: ");
 	map()->height = 0;
-	// CREATE MATRIX
-	map_matrix(map_fd);
-	// LATER: CLEANUP FUNCTION	ft_printf("\nmap.height = %d", map()->height);
+	// map_matrix(map()->fd);
+	map_matrix_rec(0);
 	x = 0;
-	while (map()->height >= 0)
+	while (map()->matrix[x])
 	{
-		ft_printf("map.matrix[%d] %s\n", x, map()->matrix[x]);
+		ft_printf("map.matrix[%d] %s", x, map()->matrix[x]);
 		x++;
-		map()->height -= 1;
 	}
-	{
-		close(map_fd);
-		// ft_printf("\nClosed map fd.\n");
-	}
+	ft_printf("\n%d\n", map()->height);
 	return (0);
 }
