@@ -11,8 +11,8 @@
 # **************************************************************************** #
 
 NAME			= so_long
-SOURCES			= ${NAME}.c
-OBJECTS			= ${SOURCES:.c=.o}
+SOURCES			= so_long.c map_checker.c 
+OBJECTS			= $(SOURCES:.c=.o)
 CC				= cc
 
 CFLAGS			= -Wall -Wextra -Werror -g
@@ -38,34 +38,34 @@ END=\033[0m
 #Silencing makefile
 $(VERBOSE).SILENT:
 
-all: ${NAME}
+all: $(NAME)
 
-${NAME}: ${OBJECTS}
+$(NAME): $(OBJECTS)
 	make -C $(LIBFT_PATH)
 	@echo "$(GREEN)******** libft compiled ********$(END)"
 	make -C $(FT_PRINTF_PATH)
 	@echo "$(GREEN)******** ft_printf compiled ********$(END)"
 	make -C $(GNL_PATH)
 	@echo "$(GREEN)******** gnl compiled ********$(END)"
-	${CC} ${CFLAGS} ${OBJECTS} $(LIBFT) $(FT_PRINTF) ${GNL} -o ${NAME}
-	@echo "$(GREEN)******** ${NAME} compiled ********$(END)"
+	$(CC) $(CFLAGS) $(OBJECTS) $(LIBFT) $(FT_PRINTF) $(GNL) -o $(NAME)
+	@echo "$(GREEN)******** $(NAME) compiled ********$(END)"
 
 %.o: %.c
-	${CC} ${CFLAGS} -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	make clean -C $(LIBFT_PATH) 
 	make clean -C $(FT_PRINTF_PATH)
 	make clean -C $(GNL_PATH)
-	${RM} ${OBJECTS}
+	$(RM) $(OBJECTS)
 	@echo "$(GREEN)******** everything clean ********$(END)"
 
 fclean: clean
 	make fclean -C $(LIBFT_PATH) 
 	make fclean -C $(FT_PRINTF_PATH)
 	make fclean -C $(GNL_PATH)
-	${RM} ${NAME}
-	@echo "$(GREEN)******** ${NAME} removed ********$(END)"
+	$(RM) $(NAME)
+	@echo "$(GREEN)******** $(NAME) removed ********$(END)"
 
 re: fclean all
 

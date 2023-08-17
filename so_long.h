@@ -6,7 +6,7 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 11:39:05 by ckojima-          #+#    #+#             */
-/*   Updated: 2023/08/15 18:06:44 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/17 19:27:16 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,27 @@
 # include <stdio.h>
 # include <unistd.h>
 
-typedef struct		map
+typedef struct map
 {
 	int		fd;
 	char	**matrix;
 	int		height;
-} t_map;
+	int		length;
+	int		exit_x;
+	int		exit_y;
+
+}			t_map;
+
+typedef struct player
+{
+	int		x;
+	int		y;
+}			t_player;
+
+// pointers
+t_map		*map(void);
+t_player	*player(void);
+
+void		check_map(void);
 
 #endif

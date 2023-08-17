@@ -6,11 +6,18 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 10:58:55 by ckojima-          #+#    #+#             */
-/*   Updated: 2023/08/15 19:57:45 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/17 19:21:01 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+t_player	*player(void)
+{
+	static t_player	player;
+
+	return(&player);
+}
 
 t_map	*map(void)
 {
@@ -96,6 +103,8 @@ int	main(int ac, char **av)
 		ft_printf("map.matrix[%d] %s", x, map()->matrix[x]);
 		x++;
 	}
-	ft_printf("\n%d\n", map()->height);
+	ft_printf("map.matrix[%d] %s", x, map()->matrix[x]);
+	ft_printf("\nheight: %d\n", map()->height);
+	check_map();
 	return (0);
 }
