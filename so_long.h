@@ -6,7 +6,7 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 11:39:05 by ckojima-          #+#    #+#             */
-/*   Updated: 2023/08/21 12:32:57 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/21 16:43:24 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ typedef struct map
 	int		length;
 	int		exit_x;
 	int		exit_y;
-	int		collectable;
+	int		coins;
+	int		valid_coins;
+	int		valid_exit;
+	int		valid_player;
 
 }			t_map;
 
@@ -43,5 +46,7 @@ t_map		*map(void);
 t_player	*player(void);
 
 void		check_map(void);
+void	fatal_error(char *msg, int line);
+
 
 #endif

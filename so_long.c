@@ -6,7 +6,7 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 10:58:55 by ckojima-          #+#    #+#             */
-/*   Updated: 2023/08/17 19:21:01 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/21 17:45:42 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_player	*player(void)
 {
 	static t_player	player;
 
-	return(&player);
+	return (&player);
 }
 
 t_map	*map(void)
@@ -31,18 +31,12 @@ int	check_args(int ac, char *av)
 	size_t	i;
 
 	if (ac != 2)
-	{
-		ft_printf("Error: wrong arguments. Usage: ./so_long <map.ber>\n");
-		return (-1);
-	}
+		fatal_error("Error: wrong arguments. Usage: ./so_long <map.ber>\n", 0);
 	i = 0;
 	i = (ft_strlen(av)) - 4;
 	// ft_printf("&av[1][%d] = %s\n", i, &av[i]);
 	if ((ft_strncmp(&av[i], ".ber", 4)) != 0)
-	{
-		ft_printf("Error: map must have the extention .ber\n");
-		return (-1);
-	}
+		fatal_error("Error: map must have the extention .ber\n", 0);
 	return (0);
 }
 
@@ -61,50 +55,31 @@ void	map_matrix_rec(int nrow)
 	map()->matrix[nrow] = map_rows;
 }
 
-// void	map_matrix(int map_fd)
-// {
-// 	int	rows;
-
-// 	rows = 0;
-// 	map()->matrix = (char **)malloc(sizeof(char *) * (6 + 1));
-// 	// find number of rows
-// 	while (1)
-// 	{
-// 		map()->matrix[rows] = get_next_line(map_fd);
-// 		if (map()->matrix[rows] == NULL)
-// 			break ;
-// 		ft_printf("map.matrix[%d] %s", rows, map()->matrix[rows]);
-// 		rows++;
-// 	}
-// 	close(map_fd);
-// 	ft_printf("\nmap.matrix[%d] %s", rows, map()->matrix[rows]);
-// 	map()->height = rows;
-// 	ft_printf("\nmap.height = %d\n", map()->height);
-// }
-
 int	main(int ac, char **av)
 {
-	int	x;
+	int	y;
 
-	if (check_args(ac, av[1]) != 0)
-	{
-		ft_printf("Call exit_program.\n");
-		return (-1);
-	}
+	check_args(ac, av[1]);
 	map()->fd = open(av[1], O_RDONLY);
 	if (map()->fd < 0)
 		perror("Error: ");
 	map()->height = 0;
-	// map_matrix(map()->fd);
 	map_matrix_rec(0);
-	x = 0;
-	while (map()->matrix[x])
+	y = 0;
+	while (map()->matrix[y])
 	{
-		ft_printf("map.matrix[%d] %s", x, map()->matrix[x]);
-		x++;
+		ft_printf("map.matrix[%d] %s Length: %d.\n", y, map()->matrix[y], ft_strlen(map()->matrix[y]));
+		y++;
 	}
-	ft_printf("map.matrix[%d] %s", x, map()->matrix[x]);
+	ft_printf("map.matrix[%d] %s", y, map()->matrix[y]);
 	ft_printf("\nheight: %d\n", map()->height);
 	check_map();
+	ft_printf("Checked path:\n");
+	y = 0;
+	// while (map()->matrix[y])
+	// {
+	// 	ft_printf("map.matrix[%d] %s. Length: %d.", y, map()->matrix[y], ft_strlen(map()->matrix[y]));
+	// 	y++;
+	// }
 	return (0);
 }
