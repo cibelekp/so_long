@@ -6,7 +6,7 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 16:37:38 by ckoxima-          #+#    #+#             */
-/*   Updated: 2023/08/19 20:04:36 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/21 12:44:38 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@
 // handle empty lines?
 // error msgs
 
+// int	check_path(void)
+// {
+// }
+
 int	check_chars(char *row, int y)
 {
 	int	x;
@@ -32,16 +36,29 @@ int	check_chars(char *row, int y)
 		if (!(row[x] == '0' || row[x] == '1' || row[x] == 'C' || row[x] == 'E'
 				|| row[x] == 'P'))
 			return (-1);
+		// BUG: does not work if last line doesnt have a \n ... matrix[last] == NULL
 		if (row[x] == 'P')
 		{
-			player()->x = x;
-			player()->y = y;
+			if (!player()->x && !player()->y)
+			{
+				player()->x = x;
+				player()->y = y;
+			}
+			else
+				ft_printf("Error: map has more than one player.\n");
 		}
 		if (row[x] == 'E')
 		{
-			map()->exit_x = x;
-			map()->exit_y = y;
+			if (!map()->exit_x && !map()->exit_y)
+			{
+				map()->exit_x = x;
+				map()->exit_y = y;
+			}
+			else
+				ft_printf("Error: map has more than one exit.\n");
 		}
+		if (row[x] == 'C')
+			map()->collectable = 1;
 		if (row[0] != '1' || row[last] != '1')
 		{
 			// ft_printf("row[0]: %c  row[last]: %c\n", row[0], row[last]);
@@ -50,8 +67,6 @@ int	check_chars(char *row, int y)
 		// ft_printf("y == %d, map()->height == %d\n", y, map()->height);
 		if ((y == 0 || y == map()->height) && row[x] != '1')
 			ft_printf("No wall: line %d row[%d]: %c\n", y + 1, x, row[x]);
-		// BUG: does not work when no \n in the last line
-		// (y == map()->height - 1) is not the ideal conditional ()
 	}
 	return (0);
 }
@@ -94,11 +109,23 @@ void	check_map(void)
 			ft_printf("Error: invalid characters. Check line %d.\n", i + 1);
 		// CHECK WALLS
 		if (check_chars(map()->matrix[i], i) == -2)
+			// calling the function too many times
 			ft_printf("Error: map does not have walls. Check line %d.\n", (i
 						+ 1));
+		// CHECK IF THERE ARE CHARACTERS, COLLECTIBLES AND EXIT
 		i++;
 	}
-	ft_printf("Character coordinates: x=%d y=%d.\n", player()->x, player()->y);
-	ft_printf("Exit coordinates: x=%d y=%d.\n", map()->exit_x, map()->exit_y);
+	if (!player()->x || !player()->y)
+		ft_printf("No Player!\n");
+	else
+		ft_printf("Character coordinates: x=%d y=%d.\n", player()->x,
+				player()->y);
+	if (!map()->exit_x || !map()->exit_y)
+		ft_printf("No Exit!\n");
+	else
+		ft_printf("Exit coordinates: x=%d y=%d.\n", map()->exit_x,
+				map()->exit_y);
+	if (!map()->collectable)
+		ft_printf("No Collectables!\n");
 	ft_printf("Checker finished!");
 }

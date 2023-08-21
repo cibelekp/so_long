@@ -6,7 +6,7 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 11:39:05 by ckojima-          #+#    #+#             */
-/*   Updated: 2023/08/17 19:27:16 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/21 12:32:57 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct map
 	int		length;
 	int		exit_x;
 	int		exit_y;
+	int		collectable;
 
 }			t_map;
 
