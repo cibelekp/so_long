@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/21 18:26:11 by ckojima-          #+#    #+#             */
-/*   Updated: 2023/08/14 12:09:29 by ckojima-         ###   ########.fr       */
+/*   Created: 2023/05/21 18:26:08 by ckojima-          #+#    #+#             */
+/*   Updated: 2023/08/21 18:10:02 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "get_next_line.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdio.h>
+char	*mod_gnl(int fd)
+{
+	static char	stash[BUFFER_SIZE + 1];
+	char		*stored;
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
-# endif
-
-char	*get_next_line(int fd);
-char	*joinline(char *line, char *stash);
-int		newline(char *stash);
-int		ft_strlen_gnl(char *str);
-void	ft_bzero_gnl(char *str);
-
-#endif
+	if (BUFFER_SIZE <= 0 || read(fd, 0, 0))
+	{
+		ft_bzero_gnl(stash);
+		return (NULL);
+	}
+	stored = NULL;
+	while (stash[0] || read(fd, stash, BUFFER_SIZE) > 0)
+	{
+		stored = joinline(stored, stash);
+		if (newline(stash) == 1)
+			break ;
+	}
+	return (stored);
+}

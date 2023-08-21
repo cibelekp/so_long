@@ -6,7 +6,7 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 18:26:04 by ckojima-          #+#    #+#             */
-/*   Updated: 2023/08/21 17:38:26 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/21 18:11:55 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ char	*joinline(char *stored, char *stash)
 	{
 		full_line[j] = stash[i];
 		j++;
-		if (stash[i] == '\n')
+		if (stash[i + 1] == '\n')
 			break ;
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 10:58:55 by ckojima-          #+#    #+#             */
-/*   Updated: 2023/08/21 17:45:42 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/21 19:08:15 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	map_matrix_rec(int nrow)
 {
 	char	*map_rows;
 
-	map_rows = get_next_line(map()->fd);
+	map_rows = mod_gnl(map()->fd);
 	if (map_rows)
 		map_matrix_rec(nrow + 1);
 	else
@@ -68,7 +68,10 @@ int	main(int ac, char **av)
 	y = 0;
 	while (map()->matrix[y])
 	{
-		ft_printf("map.matrix[%d] %s Length: %d.\n", y, map()->matrix[y], ft_strlen(map()->matrix[y]));
+		if (map()->matrix[y][0] == '\n')
+			ft_printf("map.matrix[%d] %s", y, map()->matrix[y]);
+		else
+			ft_printf("map.matrix[%d] %s\n", y, map()->matrix[y]);
 		y++;
 	}
 	ft_printf("map.matrix[%d] %s", y, map()->matrix[y]);
@@ -76,10 +79,14 @@ int	main(int ac, char **av)
 	check_map();
 	ft_printf("Checked path:\n");
 	y = 0;
-	// while (map()->matrix[y])
-	// {
-	// 	ft_printf("map.matrix[%d] %s. Length: %d.", y, map()->matrix[y], ft_strlen(map()->matrix[y]));
-	// 	y++;
-	// }
+	while (map()->matrix[y])
+	{
+		if (y > map()->height)
+			ft_printf("map.matrix[%d] %s", y, map()->matrix[y]);
+		else
+			ft_printf("map.matrix[%d] %s\n", y, map()->matrix[y]);
+		y++;
+	}
+	ft_printf("map.matrix[%d] %s", y, map()->matrix[y]);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 11:39:05 by ckojima-          #+#    #+#             */
-/*   Updated: 2023/08/21 16:43:24 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/21 19:44:06 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define SO_LONG_H
 
 # include "./ft_printf/ft_printf.h"
-# include "./gnl/get_next_line.h"
+# include "./mod_gnl/get_next_line.h"
 # include "./libft/libft.h"
 # include <fcntl.h>
 # include <stdio.h>
@@ -31,7 +31,6 @@ typedef struct map
 	int		coins;
 	int		valid_coins;
 	int		valid_exit;
-	int		valid_player;
 
 }			t_map;
 

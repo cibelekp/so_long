@@ -16,7 +16,7 @@ OBJECTS			= $(SOURCES:.c=.o)
 CC				= cc
 
 CFLAGS			= -Wall -Wextra -Werror -g
-# CFLAGS		+= -fsanitize=address -fsanitize=undefined
+CFLAGS			+= -fsanitize=address -fsanitize=undefined
 RM				= rm -rf
 
 #Libft
@@ -28,8 +28,8 @@ FT_PRINTF = ./ft_printf/ft_printf.a
 FT_PRINTF_PATH = ./ft_printf
 
 #GetNextLine
-GNL = ./gnl/gnl.a
-GNL_PATH = ./gnl
+GNL = ./mod_gnl/gnl.a
+GNL_PATH = ./mod_gnl
 
 #Colors
 GREEN=\033[0;32m
