@@ -12,11 +12,13 @@
 
 NAME			= so_long
 SOURCES			= so_long.c map_checker.c 
+# NAME			= TEST
+# SOURCES			= testmlx.c
 OBJECTS			= $(SOURCES:.c=.o)
 CC				= cc
 
 CFLAGS			= -Wall -Wextra -Werror -g
-CFLAGS			+= -fsanitize=address -fsanitize=undefined
+# CFLAGS			+= -fsanitize=address -fsanitize=undefined
 RM				= rm -rf
 
 #Libft
@@ -30,6 +32,10 @@ FT_PRINTF_PATH = ./ft_printf
 #GetNextLine
 GNL = ./mod_gnl/gnl.a
 GNL_PATH = ./mod_gnl
+
+#MLX flags
+MLX = -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
+MLX_FLAGS = -I/usr/include -Imlx_linux -O3
 
 #Colors
 GREEN=\033[0;32m
@@ -47,11 +53,11 @@ $(NAME): $(OBJECTS)
 	@echo "$(GREEN)******** ft_printf compiled ********$(END)"
 	make -C $(GNL_PATH)
 	@echo "$(GREEN)******** gnl compiled ********$(END)"
-	$(CC) $(CFLAGS) $(OBJECTS) $(LIBFT) $(FT_PRINTF) $(GNL) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJECTS) $(LIBFT) $(FT_PRINTF) $(GNL) $(MLX) -o $(NAME)
 	@echo "$(GREEN)******** $(NAME) compiled ********$(END)"
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) $(MLX_FLAGS) -c $< -o $@
 
 clean:
 	make clean -C $(LIBFT_PATH) 

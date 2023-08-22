@@ -6,7 +6,7 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 11:39:05 by ckojima-          #+#    #+#             */
-/*   Updated: 2023/08/21 19:44:06 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/22 16:15:41 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <fcntl.h>
 # include <stdio.h>
 # include <unistd.h>
+# include <mlx.h>
 
 typedef struct map
 {

@@ -6,11 +6,25 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 10:58:55 by ckojima-          #+#    #+#             */
-/*   Updated: 2023/08/21 19:08:15 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/22 18:25:20 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	display_matrix(int y)
+{
+	while (map()->matrix[y])
+	{
+		if (map()->matrix[y][0] == '\n')
+			ft_printf("map.matrix[%d] %s", y, map()->matrix[y]);
+		else
+			ft_printf("map.matrix[%d] %s\n", y, map()->matrix[y]);
+		y++;
+	}
+	ft_printf("map.matrix[%d] %s", y, map()->matrix[y]);
+	ft_printf("\nheight: %d\n", map()->height);
+}
 
 t_player	*player(void)
 {
@@ -57,36 +71,20 @@ void	map_matrix_rec(int nrow)
 
 int	main(int ac, char **av)
 {
-	int	y;
-
 	check_args(ac, av[1]);
+	/* START MAP */
 	map()->fd = open(av[1], O_RDONLY);
 	if (map()->fd < 0)
 		perror("Error: ");
-	map()->height = 0;
 	map_matrix_rec(0);
-	y = 0;
-	while (map()->matrix[y])
-	{
-		if (map()->matrix[y][0] == '\n')
-			ft_printf("map.matrix[%d] %s", y, map()->matrix[y]);
-		else
-			ft_printf("map.matrix[%d] %s\n", y, map()->matrix[y]);
-		y++;
-	}
-	ft_printf("map.matrix[%d] %s", y, map()->matrix[y]);
-	ft_printf("\nheight: %d\n", map()->height);
+	display_matrix(0);
 	check_map();
-	ft_printf("Checked path:\n");
-	y = 0;
-	while (map()->matrix[y])
-	{
-		if (y > map()->height)
-			ft_printf("map.matrix[%d] %s", y, map()->matrix[y]);
-		else
-			ft_printf("map.matrix[%d] %s\n", y, map()->matrix[y]);
-		y++;
-	}
-	ft_printf("map.matrix[%d] %s", y, map()->matrix[y]);
+	display_matrix(0);
+	/* START  */
+	// void	*mlx;
+	// void	*mlx_win;
+	// mlx = mlx_init();
+	// mlx_win = mlx_new_window(mlx, 300, 400, "Hello World!");
+	// mlx_loop(mlx);
 	return (0);
 }
