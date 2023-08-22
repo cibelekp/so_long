@@ -6,7 +6,7 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 10:58:55 by ckojima-          #+#    #+#             */
-/*   Updated: 2023/08/22 18:25:20 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/22 19:06:57 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,7 @@ int	main(int ac, char **av)
 	display_matrix(0);
 	check_map();
 	display_matrix(0);
-	/* START  */
-	// void	*mlx;
-	// void	*mlx_win;
-	// mlx = mlx_init();
-	// mlx_win = mlx_new_window(mlx, 300, 400, "Hello World!");
-	// mlx_loop(mlx);
+	/* START WINDOW */
+	start_window();
 	return (0);
 }

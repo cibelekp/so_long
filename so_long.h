@@ -6,7 +6,7 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 11:39:05 by ckojima-          #+#    #+#             */
-/*   Updated: 2023/08/22 16:15:41 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/22 19:40:37 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,7 @@ typedef struct map
 	int		fd;
 	char	**matrix;
 	int		height;
-	int		length;
-	int		exit_x;
-	int		exit_y;
+	int		width;
 	int		coins;
 	int		valid_coins;
 	int		valid_exit;
@@ -41,12 +39,26 @@ typedef struct player
 	int		y;
 }			t_player;
 
+typedef struct graphics
+{
+	void	*mlx;
+	void	*window;
+	void	*wall;
+	void	*background;
+	void	*coin;
+	void	*player;
+	void	*exit;
+
+}	t_graphics;
+
 // pointers
 t_map		*map(void);
 t_player	*player(void);
+t_graphics	*graph(void);
 
 void		check_map(void);
-void	fatal_error(char *msg, int line);
+void		fatal_error(char *msg, int line);
+void		start_window(void);
 
 
 #endif

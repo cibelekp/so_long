@@ -6,7 +6,7 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 16:37:38 by ckoxima-          #+#    #+#             */
-/*   Updated: 2023/08/21 20:29:05 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/22 19:34:57 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	check_map_size(int y)
 	while (map()->matrix[y])
 	{
 		// recognizes rows that have a different length
-		if (ft_strlen(map()->matrix[y]) != (size_t)map()->length)
+		if (ft_strlen(map()->matrix[y]) != (size_t)map()->width)
 		{
 			// ignores empty lines at the end of map
 			if (map()->matrix[y][0] == '\n')
@@ -90,7 +90,7 @@ void	check_chars(char *row, int y, int x)
 		}
 		if (row[x] == 'C')
 			map()->coins += 1;
-		if ((row[0] != '1' || row[map()->length - 1] != '1') || ((y == 0
+		if ((row[0] != '1' || row[map()->width - 1] != '1') || ((y == 0
 					|| y == map()->height) && row[x] != '1'))
 			fatal_error("Error: no walls. Check line %d.\n", y + 1);
 	}
@@ -105,8 +105,8 @@ void	check_map(void)
 	x = 0;
 	if (!map()->matrix[y])
 		fatal_error("Error: empty map.\n", 0);
-	map()->length = ft_strlen(map()->matrix[y]);
-	ft_printf("length: %d\n", map()->length);
+	map()->width = ft_strlen(map()->matrix[y]);
+	ft_printf("length: %d\n", map()->width);
 	//CHECK SIZE
 	check_map_size(y);
 	while (map()->matrix[y] && y <= map()->height)
