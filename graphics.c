@@ -6,7 +6,7 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 18:54:37 by ckojima-          #+#    #+#             */
-/*   Updated: 2023/08/23 16:28:55 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/23 18:41:10 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,30 @@ int	render_map(char **matrix)
 	return (0);
 }
 
+int	exit_game(void)
+{
+	// cleanup, destroy images
+	ft_printf("exiting game\n");
+	exit(1);
+}
+
+int	handle_keys(int keycode)
+{
+	if (keycode == 65307) //ESC
+	{
+		mlx_destroy_window(graph()->mlx, graph()->window);
+		ft_printf("exiting game\n");
+		exit(1);
+	}
+	//other keycodes + moveplayer
+	return (0);
+}
+
 void	start_window(void)
 {
 	graph()->mlx = mlx_init();
-	graph()->window = mlx_new_window(graph()->mlx, 800, 800, "My game");
+	graph()->window = mlx_new_window(graph()->mlx, map()->width * 32,
+			map()->height * 32, "My game");
 	graph()->wall = mlx_xpm_file_to_image(graph()->mlx, "images/wall.xpm",
 			&map()->width, &map()->height);
 	graph()->background = mlx_xpm_file_to_image(graph()->mlx,
@@ -74,6 +94,9 @@ void	start_window(void)
 											"images/exit.xpm",
 											&map()->width,
 											&map()->height);
+	/* HANDLE CLOSE WINDOW */
+	mlx_key_hook(graph()->window, handle_keys, NULL);
+	mlx_hook(graph()->window, 17, 0, exit_game, NULL);
 	mlx_loop_hook(graph()->mlx, render_map, map()->matrix);
 	mlx_loop(graph()->mlx);
 }
