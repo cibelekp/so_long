@@ -6,7 +6,7 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 10:58:55 by ckojima-          #+#    #+#             */
-/*   Updated: 2023/08/24 17:53:14 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/24 19:13:45 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ int	check_args(int ac, char *av)
 		fatal_error("Error: wrong arguments. Usage: ./so_long <map.ber>\n", 0);
 	i = 0;
 	i = (ft_strlen(av)) - 4;
-	// ft_printf("&av[1][%d] = %s\n", i, &av[i]);
 	if ((ft_strncmp(&av[i], ".ber", 4)) != 0)
 		fatal_error("Error: map must have the extention .ber\n", 0);
 	return (0);
@@ -72,7 +71,6 @@ void	map_matrix_rec(int nrow)
 int	main(int ac, char **av)
 {
 	check_args(ac, av[1]);
-	/* START MAP */
 	map()->fd = open(av[1], O_RDONLY);
 	if (map()->fd < 0)
 		perror("Error: ");
@@ -82,7 +80,6 @@ int	main(int ac, char **av)
 	display_matrix(0);
 	player()->steps = 0;
 	/* START WINDOW */
-	start_window();
-	
+	start_game();
 	return (0);
 }

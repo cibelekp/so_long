@@ -6,7 +6,7 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 11:39:05 by ckojima-          #+#    #+#             */
-/*   Updated: 2023/08/24 17:46:07 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/24 19:31:13 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,14 @@
 # include <stdio.h>
 # include <unistd.h>
 
-# define UP 119     // W
-# define DOWN 115   //S
-# define LEFT 97    //A
-# define RIGHT 100  //D
+# define UP 65362
+# define DOWN 65364
+# define LEFT 65361
+# define RIGHT 65363
+# define W 119
+# define S 115
+# define A 97
+# define D 100
 # define ESC 65307
 
 # define PLAYER 'p'
@@ -68,9 +72,20 @@ t_map		*map(void);
 t_player	*player(void);
 t_graphics	*graph(void);
 
-void		check_map(void);
+int			check_args(int ac, char *av);
+void		map_matrix_rec(int nrow);
 void		fatal_error(char *msg, int line);
-void		start_window(void);
+void		check_path(int x, int y);
+void		check_map_size(int y);
+void		check_chars(char *row, int y, int x);
+void		check_map(void);
+
+int			render_map(char **matrix);
+int			exit_game(void);
+void		move_player(int x_diff, int y_diff);
+int			handle_keys(int keycode);
+
+void		start_game(void);
 int			exit_game(void);
 
 #endif

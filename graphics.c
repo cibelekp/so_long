@@ -6,7 +6,7 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 18:54:37 by ckojima-          #+#    #+#             */
-/*   Updated: 2023/08/24 17:48:09 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/24 19:32:59 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ void	move_player(int x_diff, int y_diff)
 {
 	if (map()->matrix[player()->y + y_diff][player()->x + x_diff] == 'e')
 	{
-		ft_printf("FOUND EXIT\n");
 		if (map()->coins == 0)
 			exit(0);
 	}
@@ -86,29 +85,24 @@ void	move_player(int x_diff, int y_diff)
 
 int	handle_keys(int keycode)
 {
-	// int	x;
-	// int	y;
-	// x = player()->x;
-	// y = player()->y;
 	if (keycode == ESC)
 	{
 		mlx_destroy_window(graph()->mlx, graph()->window);
 		ft_printf("exiting game\n");
 		exit(1);
 	}
-	//other keycodes + moveplayer
-	if (keycode == UP) // W
+	if (keycode == UP || keycode == W) // W
 		move_player(0, -1);
-	else if (keycode == DOWN) // S
+	else if (keycode == DOWN || keycode == S) // S
 		move_player(0, 1);
-	else if (keycode == LEFT) // A
+	else if (keycode == LEFT || keycode == A) // A
 		move_player(-1, 0);
-	else if (keycode == RIGHT) // D
+	else if (keycode == RIGHT || keycode == D) // D
 		move_player(1, 0);
 	return (0);
 }
 
-void	start_window(void)
+void	start_game(void)
 {
 	graph()->mlx = mlx_init();
 	graph()->window = mlx_new_window(graph()->mlx, map()->width * 32,
