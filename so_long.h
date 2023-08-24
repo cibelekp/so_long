@@ -6,7 +6,7 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 11:39:05 by ckojima-          #+#    #+#             */
-/*   Updated: 2023/08/24 20:02:38 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/24 20:31:58 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ t_player	*player(void);
 t_graphics	*graph(void);
 
 int			check_args(int ac, char *av);
-void		map_matrix_rec(int nrow);
+void		create_map_matrix(int nrow);
 void		fatal_error(char *msg, int line);
 void		check_path(int x, int y);
 void		check_map_size(int y);
@@ -86,6 +86,7 @@ int			render_map(char **matrix);
 int			exit_game(void);
 void		move_player(int x_diff, int y_diff);
 int			handle_keys(int keycode);
+void		display_steps(void);
 
 void		start_game(void);
 int			exit_game(void);

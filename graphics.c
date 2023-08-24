@@ -6,7 +6,7 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 18:54:37 by ckojima-          #+#    #+#             */
-/*   Updated: 2023/08/24 20:05:55 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/24 20:14:40 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,14 @@ t_graphics	*graph(void)
 	return (&graphics);
 }
 
-char	*steps(void)
+void	display_steps(void)
 {
 	char	*str;
 
 	str = ft_itoa(player()->steps);
 	str = ft_strjoin("Moves: ", str);
-	return (str);
+	mlx_string_put(graph()->mlx, graph()->window, 20, 20, WHITE, str);
+	free(str);
 }
 
 int	render_map(char **matrix)
@@ -54,8 +55,7 @@ int	render_map(char **matrix)
 			if (matrix[y][x] == 'e')
 				mlx_put_image_to_window(graph()->mlx, graph()->window,
 						graph()->exit, x * 32, y * 32);
-			mlx_string_put(graph()->mlx, graph()->window, 20, 20, WHITE,
-					steps());
+			display_steps();
 			x++;
 		}
 		y++;

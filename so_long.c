@@ -6,11 +6,17 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 10:58:55 by ckojima-          #+#    #+#             */
-/*   Updated: 2023/08/24 19:13:45 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/24 20:32:51 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	init_vars(void)
+{
+	player()->steps = 0;
+	//what else has to be initialized?
+}
 
 void	display_matrix(int y)
 {
@@ -53,13 +59,13 @@ int	check_args(int ac, char *av)
 	return (0);
 }
 
-void	map_matrix_rec(int nrow)
+void	create_map_matrix(int nrow)
 {
 	char	*map_rows;
 
 	map_rows = mod_gnl(map()->fd);
 	if (map_rows)
-		map_matrix_rec(nrow + 1);
+		create_map_matrix(nrow + 1);
 	else
 	{
 		map()->matrix = (char **)malloc(sizeof(char *) * (nrow + 1));
@@ -74,12 +80,11 @@ int	main(int ac, char **av)
 	map()->fd = open(av[1], O_RDONLY);
 	if (map()->fd < 0)
 		perror("Error: ");
-	map_matrix_rec(0);
+	create_map_matrix(0);
 	display_matrix(0);
 	check_map();
-	display_matrix(0);
-	player()->steps = 0;
-	/* START WINDOW */
+	init_vars();
+	// display_matrix(0);
 	start_game();
 	return (0);
 }
