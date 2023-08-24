@@ -6,7 +6,7 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 18:54:37 by ckojima-          #+#    #+#             */
-/*   Updated: 2023/08/24 19:32:59 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/24 20:05:55 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,15 @@ t_graphics	*graph(void)
 	static t_graphics	graphics;
 
 	return (&graphics);
+}
+
+char	*steps(void)
+{
+	char	*str;
+
+	str = ft_itoa(player()->steps);
+	str = ft_strjoin("Moves: ", str);
+	return (str);
 }
 
 int	render_map(char **matrix)
@@ -45,6 +54,8 @@ int	render_map(char **matrix)
 			if (matrix[y][x] == 'e')
 				mlx_put_image_to_window(graph()->mlx, graph()->window,
 						graph()->exit, x * 32, y * 32);
+			mlx_string_put(graph()->mlx, graph()->window, 20, 20, WHITE,
+					steps());
 			x++;
 		}
 		y++;
@@ -91,13 +102,13 @@ int	handle_keys(int keycode)
 		ft_printf("exiting game\n");
 		exit(1);
 	}
-	if (keycode == UP || keycode == W) // W
+	if (keycode == UP || keycode == W)
 		move_player(0, -1);
-	else if (keycode == DOWN || keycode == S) // S
+	else if (keycode == DOWN || keycode == S)
 		move_player(0, 1);
-	else if (keycode == LEFT || keycode == A) // A
+	else if (keycode == LEFT || keycode == A)
 		move_player(-1, 0);
-	else if (keycode == RIGHT || keycode == D) // D
+	else if (keycode == RIGHT || keycode == D)
 		move_player(1, 0);
 	return (0);
 }
@@ -126,7 +137,6 @@ void	start_game(void)
 											&map()->width,
 											&map()->height);
 	mlx_key_hook(graph()->window, handle_keys, NULL);
-	// mlx_hook(graph()->window, 2, 0, handle_keys, NULL);
 	mlx_hook(graph()->window, 17, 0, exit_game, NULL);
 	mlx_loop_hook(graph()->mlx, render_map, map()->matrix);
 	mlx_loop(graph()->mlx);

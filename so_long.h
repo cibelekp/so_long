@@ -6,7 +6,7 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 11:39:05 by ckojima-          #+#    #+#             */
-/*   Updated: 2023/08/24 19:31:13 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/24 20:02:38 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,10 @@
 # define WALL '1'
 # define COIN 'c'
 # define EXIT 'e'
+# define FLOOR 'o'
+
+# define WHITE 0x00FFFFFF
+# define BLACK 0xFF000000
 
 typedef struct map
 {
@@ -45,7 +49,6 @@ typedef struct map
 	int		coins;
 	int		valid_coins;
 	int		valid_exit;
-
 }			t_map;
 
 typedef struct player
@@ -64,7 +67,6 @@ typedef struct graphics
 	void	*coin;
 	void	*player;
 	void	*exit;
-
 }			t_graphics;
 
 // pointers
