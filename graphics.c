@@ -6,7 +6,7 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 18:54:37 by ckojima-          #+#    #+#             */
-/*   Updated: 2023/08/24 20:14:40 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/24 21:55:04 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,37 +22,39 @@ t_graphics	*graph(void)
 void	display_steps(void)
 {
 	char	*str;
+	char	*str2;
 
 	str = ft_itoa(player()->steps);
-	str = ft_strjoin("Moves: ", str);
-	mlx_string_put(graph()->mlx, graph()->window, 20, 20, WHITE, str);
+	str2 = ft_strjoin("Moves: ", str);
+	mlx_string_put(graph()->mlx, graph()->window, 20, 20, WHITE, str2);
 	free(str);
+	free(str2);
 }
 
-int	render_map(char **matrix)
+int	render_map(void)
 {
 	int	y;
 	int	x;
 
 	y = 0;
-	while (matrix[y])
+	while (map()->matrix[y])
 	{
 		x = 0;
-		while (matrix[y][x])
+		while (map()->matrix[y][x])
 		{
-			if (matrix[y][x] == '1')
+			if (map()->matrix[y][x] == '1')
 				mlx_put_image_to_window(graph()->mlx, graph()->window,
 						graph()->wall, x * 32, y * 32);
-			if (matrix[y][x] == '0' || matrix[y][x] == 'o')
+			if (map()->matrix[y][x] == '0' || map()->matrix[y][x] == 'o')
 				mlx_put_image_to_window(graph()->mlx, graph()->window,
 						graph()->background, x * 32, y * 32);
-			if (matrix[y][x] == 'C' || matrix[y][x] == 'c')
+			if (map()->matrix[y][x] == 'C' || map()->matrix[y][x] == 'c')
 				mlx_put_image_to_window(graph()->mlx, graph()->window,
 						graph()->coin, x * 32, y * 32);
-			if (matrix[y][x] == 'p')
+			if (map()->matrix[y][x] == 'p')
 				mlx_put_image_to_window(graph()->mlx, graph()->window,
 						graph()->player, x * 32, y * 32);
-			if (matrix[y][x] == 'e')
+			if (map()->matrix[y][x] == 'e')
 				mlx_put_image_to_window(graph()->mlx, graph()->window,
 						graph()->exit, x * 32, y * 32);
 			display_steps();
@@ -63,9 +65,28 @@ int	render_map(char **matrix)
 	return (0);
 }
 
+void	free_array(void)
+{
+	int	i;
+
+	i = -1;
+	while (map()->matrix[++i])
+		free(map()->matrix[i]);
+	free(map()->matrix);
+}
+
 int	exit_game(void)
 {
 	// cleanup, destroy images
+	mlx_destroy_image(graph()->mlx, graph()->background);
+	mlx_destroy_image(graph()->mlx, graph()->wall);
+	mlx_destroy_image(graph()->mlx, graph()->player);
+	mlx_destroy_image(graph()->mlx, graph()->exit);
+	mlx_destroy_image(graph()->mlx, graph()->coin);
+	mlx_destroy_window(graph()->mlx, graph()->window);
+	mlx_destroy_display(graph()->mlx);
+	free(graph()->mlx);
+	free_array();
 	ft_printf("exiting game\n");
 	exit(1);
 }
@@ -75,7 +96,8 @@ void	move_player(int x_diff, int y_diff)
 	if (map()->matrix[player()->y + y_diff][player()->x + x_diff] == 'e')
 	{
 		if (map()->coins == 0)
-			exit(0);
+			// exit(0);
+			exit_game();
 	}
 	if (map()->matrix[player()->y + y_diff][player()->x + x_diff] != '1'
 		&& map()->matrix[player()->y + y_diff][player()->x + x_diff] != 'e')
@@ -98,9 +120,9 @@ int	handle_keys(int keycode)
 {
 	if (keycode == ESC)
 	{
-		mlx_destroy_window(graph()->mlx, graph()->window);
+		// mlx_destroy_window(graph()->mlx, graph()->window);
 		ft_printf("exiting game\n");
-		exit(1);
+		exit_game();
 	}
 	if (keycode == UP || keycode == W)
 		move_player(0, -1);
@@ -136,8 +158,9 @@ void	start_game(void)
 											"images/exit.xpm",
 											&map()->width,
 											&map()->height);
-	mlx_key_hook(graph()->window, handle_keys, NULL);
 	mlx_hook(graph()->window, 17, 0, exit_game, NULL);
-	mlx_loop_hook(graph()->mlx, render_map, map()->matrix);
+	// mlx_key_hook(graph()->window, handle_keys, NULL);
+	mlx_hook(graph()->window, 2, 1L<<0, handle_keys, NULL);
+	mlx_loop_hook(graph()->mlx, render_map, NULL);
 	mlx_loop(graph()->mlx);
 }

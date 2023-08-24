@@ -6,7 +6,7 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 16:37:38 by ckoxima-          #+#    #+#             */
-/*   Updated: 2023/08/24 17:25:31 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/24 21:10:30 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	fatal_error(char *msg, int line)
 {
 	ft_printf(msg, line);
-	//cleanup structure?
+	exit_game(); //cleanup
 	ft_printf("Exiting program.\n");
 	exit(1);
 }

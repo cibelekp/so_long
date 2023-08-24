@@ -6,7 +6,7 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 11:39:05 by ckojima-          #+#    #+#             */
-/*   Updated: 2023/08/24 20:31:58 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/24 20:42:10 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void		check_map_size(int y);
 void		check_chars(char *row, int y, int x);
 void		check_map(void);
 
-int			render_map(char **matrix);
+int			render_map(void);
 int			exit_game(void);
 void		move_player(int x_diff, int y_diff);
 int			handle_keys(int keycode);
