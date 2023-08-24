@@ -6,7 +6,7 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 10:58:55 by ckojima-          #+#    #+#             */
-/*   Updated: 2023/08/23 17:12:43 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/24 17:53:14 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ int	main(int ac, char **av)
 	display_matrix(0);
 	check_map();
 	display_matrix(0);
+	player()->steps = 0;
 	/* START WINDOW */
 	start_window();
 	

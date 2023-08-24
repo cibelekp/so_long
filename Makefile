@@ -18,7 +18,7 @@ OBJECTS			= $(SOURCES:.c=.o)
 CC				= cc
 
 CFLAGS			= -Wall -Wextra -Werror -g
-# CFLAGS			+= -fsanitize=address -fsanitize=undefined
+# CFLAGS			+= -fsanitize=address -fsanitize=undefined 
 RM				= rm -rf
 
 #Libft

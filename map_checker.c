@@ -6,7 +6,7 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 16:37:38 by ckoxima-          #+#    #+#             */
-/*   Updated: 2023/08/22 19:34:57 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/24 17:25:31 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,22 +27,25 @@ void	check_path(int x, int y)
 	{
 		if (map()->matrix[y][x] == 'P')
 			map()->matrix[y][x] = 'p';
-		else if (map()->matrix[y][x] == 'C')
+		if (map()->matrix[y][x] == 'C')
 		{
 			map()->matrix[y][x] = 'c';
 			map()->valid_coins += 1;
 		}
-		else if (map()->matrix[y][x] == 'E')
+		if (map()->matrix[y][x] == '0')
+			map()->matrix[y][x] = 'o';
+		if (map()->matrix[y][x] == 'E')
 		{
 			map()->matrix[y][x] = 'e';
 			map()->valid_exit += 1;
 		}
-		else if (map()->matrix[y][x] == '0')
-			map()->matrix[y][x] = 'o';
-		check_path(x + 1, y);
-		check_path(x - 1, y);
-		check_path(x, y + 1);
-		check_path(x, y - 1);
+		else
+		{
+			check_path(x + 1, y);
+			check_path(x - 1, y);
+			check_path(x, y + 1);
+			check_path(x, y - 1);
+		}
 	}
 }
 
@@ -112,7 +115,6 @@ void	check_map(void)
 	while (map()->matrix[y] && y <= map()->height)
 	{
 		check_chars(map()->matrix[y], y, -1);
-		ft_printf("Check_chars: reading line %d\n", y + 1);
 		y++;
 	}
 	//CHECKING C, E, P

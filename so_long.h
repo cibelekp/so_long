@@ -6,7 +6,7 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 11:39:05 by ckojima-          #+#    #+#             */
-/*   Updated: 2023/08/22 19:40:37 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/24 17:46:07 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,23 @@
 # define SO_LONG_H
 
 # include "./ft_printf/ft_printf.h"
-# include "./mod_gnl/get_next_line.h"
 # include "./libft/libft.h"
+# include "./mod_gnl/get_next_line.h"
 # include <fcntl.h>
+# include <mlx.h>
 # include <stdio.h>
 # include <unistd.h>
-# include <mlx.h>
+
+# define UP 119     // W
+# define DOWN 115   //S
+# define LEFT 97    //A
+# define RIGHT 100  //D
+# define ESC 65307
+
+# define PLAYER 'p'
+# define WALL '1'
+# define COIN 'c'
+# define EXIT 'e'
 
 typedef struct map
 {
@@ -37,6 +48,7 @@ typedef struct player
 {
 	int		x;
 	int		y;
+	int		steps;
 }			t_player;
 
 typedef struct graphics
@@ -49,7 +61,7 @@ typedef struct graphics
 	void	*player;
 	void	*exit;
 
-}	t_graphics;
+}			t_graphics;
 
 // pointers
 t_map		*map(void);
@@ -59,6 +71,6 @@ t_graphics	*graph(void);
 void		check_map(void);
 void		fatal_error(char *msg, int line);
 void		start_window(void);
-
+int			exit_game(void);
 
 #endif
