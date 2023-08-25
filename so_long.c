@@ -6,57 +6,21 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 10:58:55 by ckojima-          #+#    #+#             */
-/*   Updated: 2023/08/24 21:34:33 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/25 16:29:02 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	init_vars(void)
+int	main(int ac, char **av)
 {
-	player()->steps = 0;
-	map()->fd = -1;
-	//what else has to be initialized?
-}
-
-void	display_matrix(int y)
-{
-	while (map()->matrix[y])
-	{
-		if (map()->matrix[y][0] == '\n')
-			ft_printf("map.matrix[%d] %s", y, map()->matrix[y]);
-		else
-			ft_printf("map.matrix[%d] %s\n", y, map()->matrix[y]);
-		y++;
-	}
-	ft_printf("map.matrix[%d] %s", y, map()->matrix[y]);
-	ft_printf("\nheight: %d\n", map()->height);
-}
-
-t_player	*player(void)
-{
-	static t_player	player;
-
-	return (&player);
-}
-
-t_map	*map(void)
-{
-	static t_map	map_p;
-
-	return (&map_p);
-}
-
-int	check_args(int ac, char *av)
-{
-	size_t	i;
-
-	if (ac != 2)
-		fatal_error("Error: wrong arguments. Usage: ./so_long <map.ber>\n", 0);
-	i = 0;
-	i = (ft_strlen(av)) - 4;
-	if ((ft_strncmp(&av[i], ".ber", 4)) != 0)
-		fatal_error("Error: map must have the extention .ber\n", 0);
+	check_args(ac, av[1]);
+	create_map_matrix(0);
+	check_map(0);
+	init_vars();
+	start_game();
+	if (map()->fd != -1)
+		close(map()->fd);
 	return (0);
 }
 
@@ -75,18 +39,12 @@ void	create_map_matrix(int nrow)
 	map()->matrix[nrow] = map_rows;
 }
 
-int	main(int ac, char **av)
+void	init_vars(void)
 {
-	check_args(ac, av[1]);
-	map()->fd = open(av[1], O_RDONLY);
-	if (map()->fd < 0)
-		perror("Error: ");
-	create_map_matrix(0);
-	display_matrix(0);
-	check_map();
-	init_vars();
-	start_game();
-	if (map()->fd != -1)
-		close(map()->fd);
-	return (0);
+	player()->steps = 0;
+	map()->fd = -1;
+	//what else has to be initialized?
 }
+
+
+

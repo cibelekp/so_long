@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 NAME			= so_long
-SOURCES			= so_long.c map_checker.c graphics.c
+SOURCES			= so_long.c checkers.c graphics.c aux.c exit_cases.c gameplaying.c
 # NAME			= TEST
 # SOURCES			= testmlx.c
 OBJECTS			= $(SOURCES:.c=.o)

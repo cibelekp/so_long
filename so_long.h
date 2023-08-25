@@ -6,7 +6,7 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 11:39:05 by ckojima-          #+#    #+#             */
-/*   Updated: 2023/08/24 20:42:10 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/25 16:32:23 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,15 +80,19 @@ void		fatal_error(char *msg, int line);
 void		check_path(int x, int y);
 void		check_map_size(int y);
 void		check_chars(char *row, int y, int x);
-void		check_map(void);
+void		check_map(int y);
 
 int			render_map(void);
-int			exit_game(void);
 void		move_player(int x_diff, int y_diff);
 int			handle_keys(int keycode);
 void		display_steps(void);
 
 void		start_game(void);
 int			exit_game(void);
+void		clean_mlx(void);
+void		free_matrix(void);
+
+void		display_matrix(int y);
+void		init_vars(void);
 
 #endif
