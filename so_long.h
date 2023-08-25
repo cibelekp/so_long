@@ -6,7 +6,7 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 11:39:05 by ckojima-          #+#    #+#             */
-/*   Updated: 2023/08/25 20:30:00 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/25 21:46:02 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@
 # define BLACK 0xFF000000
 
 # define PLAYER_IMG "images/player.xpm"
-# define WALL_IMG "images/wall.xpm"
+# define WALL_IMG "images/water2.xpm"
 # define COIN_IMG "images/collectible.xpm"
 # define EXIT_IMG "images/exit.xpm"
-# define FLOOR_IMG "images/background.xpm"
+# define FLOOR_IMG "images/grass.xpm"
 
 typedef struct map
 {

@@ -1,7 +1,7 @@
 /* XPM */
 static char * collectible_xpm[] = {
 "32 32 352 2",
-"  	c #9CDB43",
+"  	c #C0D470",
 ". 	c #86BB3C",
 "+ 	c #7FB23A",
 "@ 	c #80B33A",
