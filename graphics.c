@@ -6,39 +6,35 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 18:54:37 by ckojima-          #+#    #+#             */
-/*   Updated: 2023/08/25 16:26:53 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/25 20:31:40 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	start_game(void)
+void	start_game(t_graphics *temp)
 {
 	graph()->mlx = mlx_init();
-	graph()->window = mlx_new_window(graph()->mlx, map()->width * 32,
-			map()->height * 32, "My game");
-	graph()->wall = mlx_xpm_file_to_image(graph()->mlx, "images/wall.xpm",
-			&map()->width, &map()->height);
-	graph()->background = mlx_xpm_file_to_image(graph()->mlx,
-												"images/background.xpm",
-												&map()->width,
-												&map()->height);
-	graph()->coin = mlx_xpm_file_to_image(graph()->mlx,
-											"images/collectible.xpm",
-											&map()->width,
-											&map()->height);
-	graph()->player = mlx_xpm_file_to_image(graph()->mlx,
-											"images/player.xpm",
-											&map()->width,
-											&map()->height);
-	graph()->exit = mlx_xpm_file_to_image(graph()->mlx,
-											"images/exit.xpm",
-											&map()->width,
-											&map()->height);
+	temp->window = mlx_new_window(graph()->mlx, map()->width * 32, map()->height
+			* 32, "My game");
+	temp->wall = convert_img(WALL_IMG);
+	temp->background = convert_img(FLOOR_IMG);
+	temp->coin = convert_img(COIN_IMG);
+	temp->player = convert_img(PLAYER_IMG);
+	temp->exit = convert_img(EXIT_IMG);
 	mlx_hook(graph()->window, 17, 0, exit_game, NULL);
 	mlx_hook(graph()->window, 2, 1L << 0, handle_keys, NULL);
 	mlx_loop_hook(graph()->mlx, render_map, NULL);
 	mlx_loop(graph()->mlx);
+}
+
+void	*convert_img(char *img_path)
+{
+	void	*address;
+
+	address = mlx_xpm_file_to_image(graph()->mlx, img_path, &map()->width,
+			&map()->height);
+	return (address);
 }
 
 int	render_map(void)
@@ -53,26 +49,27 @@ int	render_map(void)
 		while (map()->matrix[y][x])
 		{
 			if (map()->matrix[y][x] == '1')
-				mlx_put_image_to_window(graph()->mlx, graph()->window,
-						graph()->wall, x * 32, y * 32);
+				put_img(graph()->wall, x, y);
 			if (map()->matrix[y][x] == '0' || map()->matrix[y][x] == 'o')
-				mlx_put_image_to_window(graph()->mlx, graph()->window,
-						graph()->background, x * 32, y * 32);
+				put_img(graph()->background, x, y);
 			if (map()->matrix[y][x] == 'C' || map()->matrix[y][x] == 'c')
-				mlx_put_image_to_window(graph()->mlx, graph()->window,
-						graph()->coin, x * 32, y * 32);
+				put_img(graph()->coin, x, y);
 			if (map()->matrix[y][x] == 'p')
-				mlx_put_image_to_window(graph()->mlx, graph()->window,
-						graph()->player, x * 32, y * 32);
+				put_img(graph()->player, x, y);
 			if (map()->matrix[y][x] == 'e')
-				mlx_put_image_to_window(graph()->mlx, graph()->window,
-						graph()->exit, x * 32, y * 32);
+				put_img(graph()->exit, x, y);
 			display_steps();
 			x++;
 		}
 		y++;
 	}
 	return (0);
+}
+
+void	put_img(void *img_address, int x, int y)
+{
+	mlx_put_image_to_window(graph()->mlx, graph()->window, img_address, 
+		x * 32, y * 32);
 }
 
 void	display_steps(void)

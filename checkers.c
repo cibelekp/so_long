@@ -6,7 +6,7 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 16:37:38 by ckoxima-          #+#    #+#             */
-/*   Updated: 2023/08/25 16:06:19 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/25 20:31:12 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	check_args(int ac, char *av)
 {
 	size_t	i;
+	int		temp;
 
 	if (ac != 2)
 		fatal_error("Wrong arguments. Usage: ./so_long <map.ber>\n", 0);
@@ -22,7 +23,8 @@ int	check_args(int ac, char *av)
 	i = (ft_strlen(av)) - 4;
 	if ((ft_strncmp(&av[i], ".ber", 4)) != 0 || i == 0)
 		fatal_error("Invalid file. Map must have the extention .ber\n", 0);
-	map()->fd = open(av, O_RDONLY);
+	temp = open(av, O_RDONLY);
+	map()->fd = temp;
 	if (map()->fd < 0)
 	{
 		perror("Error");
@@ -50,8 +52,6 @@ void	check_map(int y)
 		fatal_error("Player cannot reach exit.\n", 0);
 	if (!map()->coins || map()->coins != map()->valid_coins)
 		fatal_error("Invalid colectables!\n", 0);
-	// else
-	// 	ft_printf("Number of colectables: %d\n", map()->coins);
 }
 
 // recognizes rows that have a different length
@@ -65,7 +65,6 @@ void	check_map_size(int y)
 			if (map()->matrix[y][0] == '\n')
 			{
 				map()->height = y - 1;
-				// ft_printf("New map height: %d\n", y);
 				break ;
 			}
 			fatal_error("Map is not retangular. Check line %d.\n", y + 1);

@@ -6,7 +6,7 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 10:58:55 by ckojima-          #+#    #+#             */
-/*   Updated: 2023/08/25 16:29:02 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/25 19:56:53 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(int ac, char **av)
 	create_map_matrix(0);
 	check_map(0);
 	init_vars();
-	start_game();
+	start_game(graph());
 	if (map()->fd != -1)
 		close(map()->fd);
 	return (0);
@@ -43,8 +43,5 @@ void	init_vars(void)
 {
 	player()->steps = 0;
 	map()->fd = -1;
-	//what else has to be initialized?
+	graph()->wall = NULL;
 }
-
-
-

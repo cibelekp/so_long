@@ -6,12 +6,11 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 13:54:43 by ckojima-          #+#    #+#             */
-/*   Updated: 2023/08/25 16:10:16 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/25 16:52:29 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
 
 t_graphics	*graph(void)
 {

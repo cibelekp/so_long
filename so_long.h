@@ -6,7 +6,7 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 11:39:05 by ckojima-          #+#    #+#             */
-/*   Updated: 2023/08/25 16:32:23 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/25 20:30:00 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,20 @@
 # define D 100
 # define ESC 65307
 
-# define PLAYER 'p'
-# define WALL '1'
-# define COIN 'c'
-# define EXIT 'e'
-# define FLOOR 'o'
+# define PLAYER p
+# define WALL 1
+# define COIN c
+# define EXIT e
+# define FLOOR o
 
 # define WHITE 0x00FFFFFF
 # define BLACK 0xFF000000
+
+# define PLAYER_IMG "images/player.xpm"
+# define WALL_IMG "images/wall.xpm"
+# define COIN_IMG "images/collectible.xpm"
+# define EXIT_IMG "images/exit.xpm"
+# define FLOOR_IMG "images/background.xpm"
 
 typedef struct map
 {
@@ -87,12 +93,15 @@ void		move_player(int x_diff, int y_diff);
 int			handle_keys(int keycode);
 void		display_steps(void);
 
-void		start_game(void);
+void		start_game(t_graphics *temp);
 int			exit_game(void);
 void		clean_mlx(void);
 void		free_matrix(void);
 
 void		display_matrix(int y);
 void		init_vars(void);
+
+void		*convert_img(char *img_path);
+void		put_img(void *img_address, int x, int y);
 
 #endif
