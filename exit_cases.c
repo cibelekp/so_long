@@ -6,7 +6,7 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 16:08:40 by ckojima-          #+#    #+#             */
-/*   Updated: 2023/08/26 18:21:37 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/26 21:12:05 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,14 @@ void	clean_mlx(void)
 	{
 		mlx_destroy_image(graph()->mlx, graph()->background);
 		mlx_destroy_image(graph()->mlx, graph()->wall);
-		mlx_destroy_image(graph()->mlx, graph()->player);
+		mlx_destroy_image(graph()->mlx, graph()->player[D_UP][0]);
+		mlx_destroy_image(graph()->mlx, graph()->player[D_DOWN][0]);
+		mlx_destroy_image(graph()->mlx, graph()->player[D_LEFT][0]);
+		mlx_destroy_image(graph()->mlx, graph()->player[D_RIGHT][0]);
+		mlx_destroy_image(graph()->mlx, graph()->player[D_UP][1]);
+		mlx_destroy_image(graph()->mlx, graph()->player[D_DOWN][1]);
+		mlx_destroy_image(graph()->mlx, graph()->player[D_LEFT][1]);
+		mlx_destroy_image(graph()->mlx, graph()->player[D_RIGHT][1]);
 		mlx_destroy_image(graph()->mlx, graph()->exit);
 		mlx_destroy_image(graph()->mlx, graph()->coin);
 		mlx_destroy_window(graph()->mlx, graph()->window);
