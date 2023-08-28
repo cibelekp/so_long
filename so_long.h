@@ -6,7 +6,7 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 11:39:05 by ckojima-          #+#    #+#             */
-/*   Updated: 2023/08/28 16:54:22 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/28 19:41:28 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ typedef struct map
 	int			coins;
 	int			valid_coins;
 	int			valid_exit;
-	int			enemy;
+	int			enemy_dir[2];
+	t_direction	en_dir;
 	int			enemy_x;
 	int			enemy_y;
 
@@ -120,5 +121,7 @@ void			init_vars(void);
 
 void			*convert_img(char *img_path);
 void			put_img(void *img_address, int x, int y);
+
+void			move_enemy(void);
 
 #endif

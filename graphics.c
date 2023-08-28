@@ -6,7 +6,7 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 18:54:37 by ckojima-          #+#    #+#             */
-/*   Updated: 2023/08/28 16:45:02 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/28 18:48:28 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ void	render_map(void)
 	{
 		count = 0;
 		player()->frame = (player()->frame == 0);
+		move_enemy();
 	}
 }
 

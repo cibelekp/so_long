@@ -6,7 +6,7 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 16:37:38 by ckoxima-          #+#    #+#             */
-/*   Updated: 2023/08/28 16:20:55 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/28 18:38:01 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,10 @@ void	check_chars(char *row, int y, int x)
 					|| y == map()->height) && row[x] != '1'))
 			fatal_error("No walls. Check line %d.\n", y + 1);
 		if (row[x] == 'N')
-			map()->enemy = 1;
+		{
+			map()->enemy_x = x;
+			map()->enemy_y = y;
+		}
 	}
 }
 

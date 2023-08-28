@@ -6,7 +6,7 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 16:08:40 by ckojima-          #+#    #+#             */
-/*   Updated: 2023/08/28 16:37:56 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/28 19:36:52 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 int	exit_game(char *msg)
 {
+	// if lost, render "YOU LOST" / if win render "YOU WIN"
 	ft_printf(msg);
 	clean_mlx();
 	free_matrix();
 	if (map()->fd != -1)
 		close(map()->fd);
-	// ft_printf("Exiting game\n");
 	exit(EXIT_SUCCESS);
 }
 
