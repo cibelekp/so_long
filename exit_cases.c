@@ -6,19 +6,20 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 16:08:40 by ckojima-          #+#    #+#             */
-/*   Updated: 2023/08/26 21:12:05 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/28 16:37:56 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	exit_game(void)
+int	exit_game(char *msg)
 {
+	ft_printf(msg);
 	clean_mlx();
 	free_matrix();
 	if (map()->fd != -1)
 		close(map()->fd);
-	ft_printf("Exiting game\n");
+	// ft_printf("Exiting game\n");
 	exit(EXIT_SUCCESS);
 }
 

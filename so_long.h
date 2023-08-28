@@ -6,7 +6,7 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 11:39:05 by ckojima-          #+#    #+#             */
-/*   Updated: 2023/08/26 21:10:26 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/28 16:54:22 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@
 # define COIN_IMG "images/collectible.xpm"
 # define EXIT_IMG "images/exit.xpm"
 # define FLOOR_IMG "images/grass.xpm"
+# define ENEMY_IMG "images/zombie1.xpm"
 
 typedef enum e_direction
 {
@@ -63,6 +64,10 @@ typedef struct map
 	int			coins;
 	int			valid_coins;
 	int			valid_exit;
+	int			enemy;
+	int			enemy_x;
+	int			enemy_y;
+
 }				t_map;
 
 typedef struct player
@@ -84,6 +89,7 @@ typedef struct graphics
 	void		*coin;
 	void		*player[4][2];
 	void		*exit;
+	void		*enemy[2];
 }				t_graphics;
 
 // pointers
@@ -105,7 +111,7 @@ int				handle_keys(int keycode);
 void			display_steps(void);
 
 void			start_game(t_graphics *temp);
-int				exit_game(void);
+int				exit_game(char *msg);
 void			clean_mlx(void);
 void			free_matrix(void);
 

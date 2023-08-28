@@ -6,7 +6,7 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 16:37:38 by ckoxima-          #+#    #+#             */
-/*   Updated: 2023/08/25 20:31:12 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/28 16:20:55 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	check_chars(char *row, int y, int x)
 	while (row[++x] != '\0' && row)
 	{
 		if (!(row[x] == '0' || row[x] == '1' || row[x] == 'C' || row[x] == 'E'
-				|| row[x] == 'P'))
+				|| row[x] == 'P' || row[x] == 'N'))
 			fatal_error("Invalid characters. Check line %d.\n", (y + 1));
 		if (row[x] == 'P')
 		{
@@ -99,13 +99,16 @@ void	check_chars(char *row, int y, int x)
 		if ((row[0] != '1' || row[map()->width - 1] != '1') || ((y == 0
 					|| y == map()->height) && row[x] != '1'))
 			fatal_error("No walls. Check line %d.\n", y + 1);
+		if (row[x] == 'N')
+			map()->enemy = 1;
 	}
 }
 
 void	check_path(int x, int y)
 {
 	if (map()->matrix[y][x] == 'P' || map()->matrix[y][x] == 'E'
-		|| map()->matrix[y][x] == 'C' || map()->matrix[y][x] == '0')
+		|| map()->matrix[y][x] == 'C' || map()->matrix[y][x] == '0'
+		|| map()->matrix[y][x] == 'N')
 	{
 		if (map()->matrix[y][x] == 'P')
 			map()->matrix[y][x] = 'p';
@@ -121,6 +124,8 @@ void	check_path(int x, int y)
 			map()->matrix[y][x] = 'e';
 			map()->valid_exit += 1;
 		}
+		if (map()->matrix[y][x] == 'N')
+			map()->matrix[y][x] = 'n';
 		else
 		{
 			check_path(x + 1, y);

@@ -6,11 +6,20 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 18:54:37 by ckojima-          #+#    #+#             */
-/*   Updated: 2023/08/26 21:11:17 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/28 16:45:02 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	calc_framespeed(void)
+{
+	if (map()->width * map()->height < 50)
+		player()->time_frame = 1500;
+	else
+		player()->time_frame = 200;
+	ft_printf("velocidade %d\n", player()->time_frame);
+}
 
 void	start_game(t_graphics *temp)
 {
@@ -29,11 +38,9 @@ void	start_game(t_graphics *temp)
 	temp->player[D_LEFT][1] = convert_img("images/Player304.xpm");
 	temp->player[D_RIGHT][1] = convert_img("images/Player303.xpm");
 	temp->exit = convert_img(EXIT_IMG);
-	if (map()->width * map()->height < 50)
-		player()->time_frame = 1500;
-	else
-		player()->time_frame = 200;
-	ft_printf("velocidade %d\n", player()->time_frame);
+	temp->enemy[0] = convert_img(ENEMY_IMG);
+	temp->enemy[1] = convert_img("images/zombie2.xpm");
+	calc_framespeed();
 	mlx_hook(graph()->window, 17, 0, exit_game, NULL);
 	mlx_hook(graph()->window, 2, 1L << 0, handle_keys, NULL);
 	mlx_loop_hook(graph()->mlx, (void *)render_map, NULL);
@@ -72,6 +79,8 @@ void	render_map(void)
 				put_img(graph()->player[player()->dir][player()->frame], x, y);
 			if (map()->matrix[y][x] == 'e')
 				put_img(graph()->exit, x, y);
+			if (map()->matrix[y][x] == 'N' || map()->matrix[y][x] == 'n')
+				put_img(graph()->enemy[player()->frame], x, y);
 			display_steps();
 		}
 	}
@@ -85,7 +94,7 @@ void	render_map(void)
 void	put_img(void *img_address, int x, int y)
 {
 	mlx_put_image_to_window(graph()->mlx, graph()->window, img_address, x * 32,
-		y * 32);
+			y * 32);
 }
 
 void	display_steps(void)
