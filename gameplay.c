@@ -6,7 +6,7 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 16:26:24 by ckojima-          #+#    #+#             */
-/*   Updated: 2023/08/28 19:50:23 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/29 11:32:42 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,11 @@ void	move_enemy(void)
 	// 	x_diff = 1;
 	// else
 	// 	x_diff = -1;
-	map()->en_dir = D_RIGHT;
+	ft_printf("zombie direction: %d\n", map()->en_dir);
 	if (map()->en_dir == D_UP)
-		y_diff = 1;
-	if (map()->en_dir == D_DOWN)
 		y_diff = -1;
+	if (map()->en_dir == D_DOWN)
+		y_diff = 1;
 	if (map()->en_dir == D_LEFT)
 		x_diff = -1;
 	if (map()->en_dir == D_RIGHT)
@@ -84,20 +84,20 @@ void	move_enemy(void)
 		map()->enemy_x += x_diff;
 		map()->enemy_y += y_diff;
 		map()->matrix[map()->enemy_y][map()->enemy_x] = 'n';
-		ft_printf("zombie walked: %d\n", map()->enemy_x);
+		ft_printf("zombie walked: %d, %d\n", map()->enemy_x, map()->enemy_y);
 	}
 	else
 	{
 		// map()->enemy_dir[0] = (map()->enemy_dir[0] == 0);
 		if (map()->en_dir == D_UP)
 			map()->en_dir = D_RIGHT;
-		if (map()->en_dir == D_RIGHT)
+		else if (map()->en_dir == D_RIGHT)
 			map()->en_dir = D_DOWN;
-		if (map()->en_dir == D_DOWN)
+		else if (map()->en_dir == D_DOWN)
 			map()->en_dir = D_LEFT;
-		if (map()->en_dir == D_LEFT)
+		else if (map()->en_dir == D_LEFT)
 			map()->en_dir = D_UP;
-		ft_printf("zombie direction: %d\n", map()->en_dir);
+		ft_printf("zombie direction changed: %d\n", map()->en_dir);
 	}
 	if (map()->enemy_x == player()->x && map()->enemy_y == player()->y)
 		exit_game("You lost!\n");
