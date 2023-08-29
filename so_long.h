@@ -6,7 +6,7 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 11:39:05 by ckojima-          #+#    #+#             */
-/*   Updated: 2023/08/29 23:44:40 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/30 00:28:25 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,10 @@
 # define D 100
 # define ESC 65307
 
-# define PLAYER p
-# define WALL 1
-# define COIN c
-# define EXIT e
-# define FLOOR o
-
 # define WHITE 0x00FFFFFF
 # define BLACK 0xFF000000
 
-# define IMG_WALL "images/water.xpm"
+# define IMG_WALL "images/kitchen_simple.xpm"
 # define IMG_FLOOR "images/white_floor.xpm"
 # define IMG_COIN "images/sushi20.xpm"
 # define IMG_EXIT_CLOSED "images/box_closed.xpm"
@@ -58,12 +52,6 @@
 
 # define IMG_ENEMY_D1 "images/human_front1.xpm"
 # define IMG_ENEMY_D2 "images/human_front2.xpm"
-# define IMG_ENEMY_U1 "images/human_back1.xpm"
-# define IMG_ENEMY_U2 "images/human_back2.xpm"
-# define IMG_ENEMY_L1 "images/human_left3.xpm"
-# define IMG_ENEMY_L2 "images/human_left4.xpm"
-# define IMG_ENEMY_R1 "images/human_right1.xpm"
-# define IMG_ENEMY_R2 "images/human_right2.xpm"
 
 typedef enum e_direction
 {
@@ -73,12 +61,12 @@ typedef enum e_direction
 	D_RIGHT,
 }				t_direction;
 
-typedef struct enemy //posso fazer um t_enemy * enemies[map()-> enemies]
+typedef struct enemy
 {
-	int x;
-	int y;
-	int frame;
-	t_direction dir;
+	int			x;
+	int			y;
+	int			frame;
+	t_direction	dir;
 }				t_enemy;
 
 typedef struct map
@@ -98,7 +86,7 @@ typedef struct player
 	int			y;
 	int			steps;
 	int			frame;
-	int time_frame; //maybe in graphics
+	int			time_frame;
 	t_direction	dir;
 }				t_player;
 

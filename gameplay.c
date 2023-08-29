@@ -6,7 +6,7 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 16:26:24 by ckojima-          #+#    #+#             */
-/*   Updated: 2023/08/29 23:42:14 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/30 00:26:39 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ void	move_enemy(void)
 	{
 		srand(time(NULL));
 		enemy()->dir = rand() % 4;
-		ft_printf("enemy direction changed: %d\n", enemy()->dir);
 	}
 	if (enemy()->x == player()->x && enemy()->y == player()->y)
 		exit_game("You lost!\n");

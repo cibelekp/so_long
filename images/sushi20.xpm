@@ -190,6 +190,10 @@ static char *Safeimagekit_resized_img1693330204[] = {
 ".X c #FEFEFE",
 /* pixels */
 " X X.X X.X.X{..X.X.X.X.X.X.X.X.X.X.X.X.X.X.X.X.X.X.X{..X.X.X.X.X",
+".X.X.X.X.X.X.X.X.X.X.X.X.X.X X X X|..X.X{..X.X.X.X.X.X.X.X.X.X.X",
+".X.X.X.X.X.X.X.X.X.X.X.X.X.X.X.X X X.X.X.X.X.X.X.X.X.X.X.X.X.X.X",
+" X X.X.X.X.X.X.X.X.X.X.X.X.X.X.X X.X.X.X.X.X X.X.X.X.X.X.X.X X.X",
+".X.X.X.X.X.X.X.X.X.X.X.X.X.X.X{..X.X.X.X.X.X X{.{..X.X.X.X.X.X.X",
 ".X.X.X.X.X.X.X.X.X.X.X.X.X.X.X.X.X.X.X.X.X.X.X.X.X.X.X.X.X.X.X.X",
 ".X.X.X.X.X.X.X.X.X.X.X.X.X X.X.X.X.X.X.X.X.X.X.X.X.X.X.X.X.X.X.X",
 ".X.X|..X.X.X.X.X.X.X.X.X.X.X X X{..X.X.X.X.X.X.X.X.X.X.X.X.X.X.X",
@@ -216,9 +220,5 @@ static char *Safeimagekit_resized_img1693330204[] = {
 ".X{..X{. X.X.X.X.X.X{..X.X.X.X.X.X.X.X.X.X.X.X.X.X.X.X X.X{.{..X",
 "{..X X{..X.X.X.X.X.X.X.X.X.X.X.X.X.X.X.X.X.X.X.X.X.X.X.X.X.X.X{.",
 ".X.X.X.X X.X.X.X.X|..X.X.X.X X.X.X.X.X.X.X.X.X.X.X.X.X X X.X.X.X",
-".X.X.X.X.X.X.X.X.X.X.X.X.X.X X X X|..X.X{..X.X.X.X.X.X.X.X.X.X.X",
-".X.X.X.X.X.X.X.X.X.X.X.X.X.X.X.X X X.X.X.X.X.X.X.X.X.X.X.X.X.X.X",
-" X X.X.X.X.X.X.X.X.X.X.X.X.X.X.X X.X.X.X.X.X X.X.X.X.X.X.X.X X.X",
-".X.X.X.X.X.X.X.X.X.X.X.X.X.X.X{..X.X.X.X.X.X X{.{..X.X.X.X.X.X.X",
 ".X.X{..X{..X{.{. X.X.X.X.X.X.X.X.X.X|..X.X.X X.X.X{..X.X.X.X.X.X"
 };

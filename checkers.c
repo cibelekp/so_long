@@ -6,7 +6,7 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 16:37:38 by ckoxima-          #+#    #+#             */
-/*   Updated: 2023/08/29 21:05:15 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/29 23:53:38 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,6 @@ void	check_map(int y)
 		fatal_error("Player cannot reach exit.\n", 0);
 	if (!map()->coins || map()->coins != map()->valid_coins)
 		fatal_error("Invalid colectables!\n", 0);
-	// while (map()->enemies_n > 0)
-	// {
-	// 	map()->en_data[map()->enemies_n]->y = y;
-	// 	ft_printf("TEST: map()->en_data[%d]->y = %d", map()->enemies_n, y);
-	// }
 }
 
 // recognizes rows that have a different length
@@ -106,11 +101,8 @@ void	check_chars(char *row, int y, int x)
 			fatal_error("No walls. Check line %d.\n", y + 1);
 		if (row[x] == 'N')
 		{
-			// map()->enemies_n += 1; //checking how many enemies
-			// map()->enemy_x = x;
-			// map()->enemy_y = y;
 			if (enemy()->y || enemy()->x)
-				fatal_error("Invalid enemies. Check line %d.\n", (y + 1));
+				fatal_error("Map has more than one enemy. Line %d.\n", (y + 1));
 			enemy()->y = y;
 			enemy()->x = x;
 		}

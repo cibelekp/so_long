@@ -6,7 +6,7 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 16:08:40 by ckojima-          #+#    #+#             */
-/*   Updated: 2023/08/29 23:44:23 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/30 00:27:02 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ void	clean_mlx(void)
 		mlx_destroy_image(graph()->mlx, graph()->player[D_DOWN][1]);
 		mlx_destroy_image(graph()->mlx, graph()->player[D_LEFT][1]);
 		mlx_destroy_image(graph()->mlx, graph()->player[D_RIGHT][1]);
+		mlx_destroy_image(graph()->mlx, graph()->enemy[0]);
+		mlx_destroy_image(graph()->mlx, graph()->enemy[1]);
 		mlx_destroy_image(graph()->mlx, graph()->exit[0]);
 		mlx_destroy_image(graph()->mlx, graph()->exit[1]);
 		mlx_destroy_image(graph()->mlx, graph()->coin);
@@ -55,7 +57,6 @@ void	clean_mlx(void)
 		mlx_destroy_display(graph()->mlx);
 		free(graph()->mlx);
 	}
-	ft_printf("mlx cleaned\n");
 }
 
 void	free_matrix(void)

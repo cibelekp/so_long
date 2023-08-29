@@ -6,7 +6,7 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 10:58:55 by ckojima-          #+#    #+#             */
-/*   Updated: 2023/08/29 23:38:13 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/30 00:25:34 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,10 @@ int	main(int ac, char **av)
 {
 	check_args(ac, av[1]);
 	create_map_matrix(0);
-	display_matrix(0);
 	check_map(0);
 	init_vars();
 	start_game(graph());
 	exit_game("Exiting game\n");
-	// if (map()->fd != -1)
-	// 	close(map()->fd);
 	return (0);
 }
 

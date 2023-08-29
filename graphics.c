@@ -6,7 +6,7 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 18:54:37 by ckojima-          #+#    #+#             */
-/*   Updated: 2023/08/29 23:41:45 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/30 00:29:01 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	calc_framespeed(void)
 		player()->time_frame = 1500;
 	else
 		player()->time_frame = 200;
-	ft_printf("velocidade %d\n", player()->time_frame);
 }
 
 void	start_game(t_graphics *temp)
@@ -42,7 +41,7 @@ void	start_game(t_graphics *temp)
 	temp->enemy[0] = convert_img(IMG_ENEMY_D1);
 	temp->enemy[1] = convert_img(IMG_ENEMY_D2);
 	calc_framespeed();
-	mlx_hook(graph()->window, 17, 0, exit_game, NULL);
+	mlx_hook(graph()->window, 17, 0, exit_game, "Exiting game\n");
 	mlx_hook(graph()->window, 2, 1L << 0, handle_keys, NULL);
 	mlx_loop_hook(graph()->mlx, (void *)render_map, NULL);
 	mlx_loop(graph()->mlx);
@@ -109,7 +108,7 @@ void	display_steps(void)
 
 	str = ft_itoa(player()->steps);
 	str2 = ft_strjoin("Moves: ", str);
-	mlx_string_put(graph()->mlx, graph()->window, 20, 20, WHITE, str2);
+	mlx_string_put(graph()->mlx, graph()->window, 20, 20, BLACK, str2);
 	free(str);
 	free(str2);
 }
