@@ -6,7 +6,7 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 18:54:37 by ckojima-          #+#    #+#             */
-/*   Updated: 2023/08/29 11:35:07 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/29 21:42:34 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,20 +26,20 @@ void	start_game(t_graphics *temp)
 	graph()->mlx = mlx_init();
 	temp->window = mlx_new_window(graph()->mlx, map()->width * 32, map()->height
 			* 32, "My game");
-	temp->wall = convert_img(WALL_IMG);
-	temp->background = convert_img(FLOOR_IMG);
-	temp->coin = convert_img(COIN_IMG);
-	temp->player[D_UP][0] = convert_img("images/Player202.xpm");
-	temp->player[D_DOWN][0] = convert_img("images/Player201.xpm");
-	temp->player[D_LEFT][0] = convert_img("images/Player204.xpm");
-	temp->player[D_RIGHT][0] = convert_img("images/Player203.xpm");
-	temp->player[D_UP][1] = convert_img("images/Player302.xpm");
-	temp->player[D_DOWN][1] = convert_img("images/Player301.xpm");
-	temp->player[D_LEFT][1] = convert_img("images/Player304.xpm");
-	temp->player[D_RIGHT][1] = convert_img("images/Player303.xpm");
-	temp->exit = convert_img(EXIT_IMG);
-	temp->enemy[0] = convert_img(ENEMY_IMG);
-	temp->enemy[1] = convert_img("images/zombie2.xpm");
+	temp->wall = convert_img(IMG_WALL);
+	temp->background = convert_img(IMG_FLOOR);
+	temp->coin = convert_img(IMG_COIN);
+	temp->player[D_UP][0] = convert_img(IMG_PLAYER_U1);
+	temp->player[D_DOWN][0] = convert_img(IMG_PLAYER_D1);
+	temp->player[D_LEFT][0] = convert_img(IMG_PLAYER_L1);
+	temp->player[D_RIGHT][0] = convert_img(IMG_PLAYER_R1);
+	temp->player[D_UP][1] = convert_img(IMG_PLAYER_U2);
+	temp->player[D_DOWN][1] = convert_img(IMG_PLAYER_D2);
+	temp->player[D_LEFT][1] = convert_img(IMG_PLAYER_L2);
+	temp->player[D_RIGHT][1] = convert_img(IMG_PLAYER_R2);
+	temp->exit = convert_img(IMG_EXIT);
+	temp->enemy[0] = convert_img(IMG_ENEMY_D1);
+	temp->enemy[1] = convert_img(IMG_ENEMY_D2);
 	calc_framespeed();
 	mlx_hook(graph()->window, 17, 0, exit_game, NULL);
 	mlx_hook(graph()->window, 2, 1L << 0, handle_keys, NULL);
@@ -82,13 +82,20 @@ void	render_map(void)
 			if (map()->matrix[y][x] == 'N' || map()->matrix[y][x] == 'n')
 				put_img(graph()->enemy[player()->frame], x, y);
 			display_steps();
+			// if (map()->lost)
+			// {
+			// 	put_img(graph()->wall, x, y);
+			// 	// graph()->lost = convert_img("images/youlost.xpm");
+			// 	// put_img(graph()->lost, x/2, y/2);
+			// }
 		}
 	}
 	if (count++ > player()->time_frame)
 	{
 		count = 0;
 		player()->frame = (player()->frame == 0);
-		if (map()->enemy_x)
+		// if (map()->enemy_x)
+		if (enemy()->x)
 			move_enemy();
 	}
 }
@@ -106,7 +113,7 @@ void	display_steps(void)
 
 	str = ft_itoa(player()->steps);
 	str2 = ft_strjoin("Moves: ", str);
-	mlx_string_put(graph()->mlx, graph()->window, 20, 20, BLACK, str2);
+	mlx_string_put(graph()->mlx, graph()->window, 20, 20, WHITE, str2);
 	free(str);
 	free(str2);
 }

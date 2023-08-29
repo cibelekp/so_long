@@ -1,10 +1,15 @@
 /* XPM */
 static char * bretzel_xpm[] = {
 "32 32 4 1",
-" 	c #C0D440",
+" 	c #FEFEFE",
 ".	c #D77643",
 "+	c #BE4A2F",
 "@	c #E4A672",
+"                                ",
+"                                ",
+"                                ",
+"                                ",
+"                                ",
 "                                ",
 "                                ",
 "                                ",
@@ -31,4 +36,5 @@ static char * bretzel_xpm[] = {
 "                                ",
 "                                ",
 "                                ",
-"                                "};
+"                                "
+};

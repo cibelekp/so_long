@@ -6,7 +6,7 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 11:39:05 by ckojima-          #+#    #+#             */
-/*   Updated: 2023/08/28 19:41:28 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/29 22:03:29 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <mlx.h>
 # include <stdio.h>
 # include <unistd.h>
+# include <time.h>
 
 # define UP 65362
 # define DOWN 65364
@@ -40,12 +41,28 @@
 # define WHITE 0x00FFFFFF
 # define BLACK 0xFF000000
 
-# define PLAYER_IMG "images/Player201.xpm"
-# define WALL_IMG "images/water.xpm"
-# define COIN_IMG "images/collectible.xpm"
-# define EXIT_IMG "images/exit.xpm"
-# define FLOOR_IMG "images/grass.xpm"
-# define ENEMY_IMG "images/zombie1.xpm"
+# define IMG_WALL "images/water.xpm"
+# define IMG_COIN "images/sushi20.xpm"
+# define IMG_EXIT "images/box_open.xpm"
+# define IMG_FLOOR "images/white_floor.xpm"
+
+# define IMG_PLAYER_D1 "images/cat_front1.xpm"
+# define IMG_PLAYER_D2 "images/cat_front2.xpm"
+# define IMG_PLAYER_U1 "images/cat_back1.xpm"
+# define IMG_PLAYER_U2 "images/cat_back2.xpm"
+# define IMG_PLAYER_L1 "images/cat_left3.xpm"
+# define IMG_PLAYER_L2 "images/cat_left4.xpm"
+# define IMG_PLAYER_R1 "images/cat_right1.xpm"
+# define IMG_PLAYER_R2 "images/cat_right2.xpm"
+
+# define IMG_ENEMY_D1 "images/human_front1.xpm"
+# define IMG_ENEMY_D2 "images/human_front2.xpm"
+# define IMG_ENEMY_U1 "images/human_back1.xpm"
+# define IMG_ENEMY_U2 "images/human_back2.xpm"
+# define IMG_ENEMY_L1 "images/human_left3.xpm"
+# define IMG_ENEMY_L2 "images/human_left4.xpm"
+# define IMG_ENEMY_R1 "images/human_right1.xpm"
+# define IMG_ENEMY_R2 "images/human_right2.xpm"
 
 typedef enum e_direction
 {
@@ -54,6 +71,15 @@ typedef enum e_direction
 	D_LEFT,
 	D_RIGHT,
 }				t_direction;
+
+typedef struct enemy //posso fazer um t_enemy * enemies[map()-> enemies]
+{
+	int			x;
+	int			y;
+	int			frame;
+	t_direction	dir;
+}				t_enemy;
+
 
 typedef struct map
 {
@@ -64,11 +90,13 @@ typedef struct map
 	int			coins;
 	int			valid_coins;
 	int			valid_exit;
-	int			enemy_dir[2];
-	t_direction	en_dir;
-	int			enemy_x;
-	int			enemy_y;
-
+	int			enemy_dir[2]; //
+	t_direction	en_dir; //
+	int			enemy_x; //
+	int			enemy_y; //
+	int			lost;
+	int			enemies_n; //number of enemies
+	t_enemy		*en_data[5]; //enemies data
 }				t_map;
 
 typedef struct player
@@ -77,7 +105,7 @@ typedef struct player
 	int			y;
 	int			steps;
 	int			frame;
-	int			time_frame;
+	int			time_frame; //maybe in graphics
 	t_direction	dir;
 }				t_player;
 
@@ -91,12 +119,15 @@ typedef struct graphics
 	void		*player[4][2];
 	void		*exit;
 	void		*enemy[2];
+	void		*lost; // bg image for lost
+	void		*enemies[5][4][2]; // images of max 5 enemies
 }				t_graphics;
 
 // pointers
 t_map			*map(void);
 t_player		*player(void);
 t_graphics		*graph(void);
+t_enemy			*enemy(void);
 
 int				check_args(int ac, char *av);
 void			create_map_matrix(int nrow);

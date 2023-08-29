@@ -6,7 +6,7 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 13:54:43 by ckojima-          #+#    #+#             */
-/*   Updated: 2023/08/25 16:52:29 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/29 20:18:55 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 t_graphics	*graph(void)
 {
-	static t_graphics	graphics;
+	static t_graphics	g;
 
-	return (&graphics);
+	return (&g);
 }
 
 t_player	*player(void)
 {
-	static t_player	player;
+	static t_player	p;
 
-	return (&player);
+	return (&p);
 }
 
 t_map	*map(void)
@@ -31,4 +31,11 @@ t_map	*map(void)
 	static t_map	map_p;
 
 	return (&map_p);
+}
+
+t_enemy	*enemy(void)
+{
+	static t_enemy	n;
+
+	return (&n);
 }

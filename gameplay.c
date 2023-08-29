@@ -6,7 +6,7 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 16:26:24 by ckojima-          #+#    #+#             */
-/*   Updated: 2023/08/29 11:32:42 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/29 21:52:51 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@ int	handle_keys(int keycode)
 	return (0);
 }
 
+void	lost(void)
+{
+	map()->lost = 1;
+}
+
 void	move_player(int x_diff, int y_diff, t_direction dir)
 {
 	player()->dir = dir;
@@ -45,6 +50,7 @@ void	move_player(int x_diff, int y_diff, t_direction dir)
 		}
 		if (map()->matrix[player()->y + y_diff][player()->x + x_diff] == 'n'
 			|| map()->matrix[player()->y + y_diff][player()->x + x_diff] == 'N')
+			// lost();
 			exit_game("You lost!\n");
 		map()->matrix[player()->y][player()->x] = 'o';
 		player()->x += x_diff;
@@ -62,46 +68,78 @@ void	move_enemy(void)
 
 	y_diff = 0;
 	x_diff = 0;
-	// if (map()->enemy_dir[0] == 0)
-	// 	x_diff = 1;
-	// else
-	// 	x_diff = -1;
-	ft_printf("zombie direction: %d\n", map()->en_dir);
-	if (map()->en_dir == D_UP)
+	if (enemy()->dir == D_UP)
 		y_diff = -1;
-	if (map()->en_dir == D_DOWN)
+	if (enemy()->dir == D_DOWN)
 		y_diff = 1;
-	if (map()->en_dir == D_LEFT)
+	if (enemy()->dir == D_LEFT)
 		x_diff = -1;
-	if (map()->en_dir == D_RIGHT)
+	if (enemy()->dir == D_RIGHT)
 		x_diff = 1;
-	if (map()->matrix[map()->enemy_y + y_diff][map()->enemy_x + x_diff] != '1'
-		&& map()->matrix[map()->enemy_y + y_diff][map()->enemy_x
-		+ x_diff] != 'e' && map()->matrix[map()->enemy_y
-		+ y_diff][map()->enemy_x + x_diff] != 'c')
+	if (map()->matrix[enemy()->y + y_diff][enemy()->x + x_diff] != '1'
+		&& map()->matrix[enemy()->y + y_diff][enemy()->x + x_diff] != 'e'
+		&& map()->matrix[enemy()->y + y_diff][enemy()->x + x_diff] != 'c')
 	{
-		map()->matrix[map()->enemy_y][map()->enemy_x] = 'o';
-		map()->enemy_x += x_diff;
-		map()->enemy_y += y_diff;
-		map()->matrix[map()->enemy_y][map()->enemy_x] = 'n';
-		ft_printf("zombie walked: %d, %d\n", map()->enemy_x, map()->enemy_y);
+		map()->matrix[enemy()->y][enemy()->x] = 'o';
+		enemy()->x += x_diff;
+		enemy()->y += y_diff;
+		map()->matrix[enemy()->y][enemy()->x] = 'n';
 	}
 	else
 	{
-		// map()->enemy_dir[0] = (map()->enemy_dir[0] == 0);
-		if (map()->en_dir == D_UP)
-			map()->en_dir = D_RIGHT;
-		else if (map()->en_dir == D_RIGHT)
-			map()->en_dir = D_DOWN;
-		else if (map()->en_dir == D_DOWN)
-			map()->en_dir = D_LEFT;
-		else if (map()->en_dir == D_LEFT)
-			map()->en_dir = D_UP;
-		ft_printf("zombie direction changed: %d\n", map()->en_dir);
+		//random move change
+		srand(time(NULL));
+		enemy()->dir = rand() % 4; // Generates a number in the range [0, 3]
+		printf("Random number: %d\n", enemy()->dir);
+		// ft_printf("enemy direction changed: %d\n", enemy()->dir);
 	}
-	if (map()->enemy_x == player()->x && map()->enemy_y == player()->y)
+	if (enemy()->x == player()->x && enemy()->y == player()->y)
 		exit_game("You lost!\n");
-	//	if (map()->matrix[map()->enemy_y + y_diff][map()->enemy_x
-	// + x_diff] == '1'
-	//mudar direcao randomly D_DOWN += 1
 }
+
+// void	move_enemy(void)
+// {
+// 	int	y_diff;
+// 	int	x_diff;
+
+// 	y_diff = 0;
+// 	x_diff = 0;
+// 	// ft_printf("zombie direction: %d\n", map()->en_dir);
+// 	if (map()->en_dir == D_UP)
+// 		y_diff = -1;
+// 	if (map()->en_dir == D_DOWN)
+// 		y_diff = 1;
+// 	if (map()->en_dir == D_LEFT)
+// 		x_diff = -1;
+// 	if (map()->en_dir == D_RIGHT)
+// 		x_diff = 1;
+// 	if (map()->matrix[map()->enemy_y + y_diff][map()->enemy_x + x_diff] != '1'
+// 		&& map()->matrix[map()->enemy_y + y_diff][map()->enemy_x
+// 		+ x_diff] != 'e' && map()->matrix[map()->enemy_y
+// 		+ y_diff][map()->enemy_x + x_diff] != 'c')
+// 	{
+// 		map()->matrix[map()->enemy_y][map()->enemy_x] = 'o';
+// 		map()->enemy_x += x_diff;
+// 		map()->enemy_y += y_diff;
+// 		map()->matrix[map()->enemy_y][map()->enemy_x] = 'n';
+// 		// ft_printf("zombie walked: %d, %d\n", map()->enemy_x, map()->enemy_y);
+// 	}
+// 	else
+// 	{
+// 		// SUBSTITUIR POR RANDOM
+// 		if (map()->en_dir == D_UP)
+// 			map()->en_dir = D_RIGHT;
+// 		else if (map()->en_dir == D_RIGHT)
+// 			map()->en_dir = D_DOWN;
+// 		else if (map()->en_dir == D_DOWN)
+// 			map()->en_dir = D_LEFT;
+// 		else if (map()->en_dir == D_LEFT)
+// 			map()->en_dir = D_UP;
+// 		ft_printf("zombie direction changed: %d\n", map()->en_dir);
+// 	}
+// 	if (map()->enemy_x == player()->x && map()->enemy_y == player()->y)
+// 		exit_game("You lost!\n");
+// 	//	if (map()->matrix[map()->enemy_y + y_diff][map()->enemy_x
+// 	// + x_diff] == '1'
+// 	//mudar direcao randomly D_DOWN += 1
+// }
