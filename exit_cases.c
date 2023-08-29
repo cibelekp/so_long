@@ -6,7 +6,7 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 16:08:40 by ckojima-          #+#    #+#             */
-/*   Updated: 2023/08/29 15:27:12 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/29 23:44:23 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	exit_game(char *msg)
 {
-	// if lost, render "YOU LOST" / if win render "YOU WIN"
 	ft_printf(msg);
 	clean_mlx();
 	free_matrix();
@@ -49,7 +48,8 @@ void	clean_mlx(void)
 		mlx_destroy_image(graph()->mlx, graph()->player[D_DOWN][1]);
 		mlx_destroy_image(graph()->mlx, graph()->player[D_LEFT][1]);
 		mlx_destroy_image(graph()->mlx, graph()->player[D_RIGHT][1]);
-		mlx_destroy_image(graph()->mlx, graph()->exit);
+		mlx_destroy_image(graph()->mlx, graph()->exit[0]);
+		mlx_destroy_image(graph()->mlx, graph()->exit[1]);
 		mlx_destroy_image(graph()->mlx, graph()->coin);
 		mlx_destroy_window(graph()->mlx, graph()->window);
 		mlx_destroy_display(graph()->mlx);

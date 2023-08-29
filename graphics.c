@@ -6,7 +6,7 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 18:54:37 by ckojima-          #+#    #+#             */
-/*   Updated: 2023/08/29 21:42:34 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/29 23:41:45 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ void	start_game(t_graphics *temp)
 	temp->player[D_DOWN][1] = convert_img(IMG_PLAYER_D2);
 	temp->player[D_LEFT][1] = convert_img(IMG_PLAYER_L2);
 	temp->player[D_RIGHT][1] = convert_img(IMG_PLAYER_R2);
-	temp->exit = convert_img(IMG_EXIT);
+	temp->exit[0] = convert_img(IMG_EXIT_CLOSED);
+	temp->exit[1] = convert_img(IMG_EXIT_OPEN);
 	temp->enemy[0] = convert_img(IMG_ENEMY_D1);
 	temp->enemy[1] = convert_img(IMG_ENEMY_D2);
 	calc_framespeed();
@@ -77,24 +78,19 @@ void	render_map(void)
 				put_img(graph()->coin, x, y);
 			if (map()->matrix[y][x] == 'p')
 				put_img(graph()->player[player()->dir][player()->frame], x, y);
-			if (map()->matrix[y][x] == 'e')
-				put_img(graph()->exit, x, y);
+			if (map()->matrix[y][x] == 'e' && map()->coins != 0)
+				put_img(graph()->exit[0], x, y);
+			if (map()->matrix[y][x] == 'e' && map()->coins == 0)
+				put_img(graph()->exit[1], x, y);
 			if (map()->matrix[y][x] == 'N' || map()->matrix[y][x] == 'n')
 				put_img(graph()->enemy[player()->frame], x, y);
 			display_steps();
-			// if (map()->lost)
-			// {
-			// 	put_img(graph()->wall, x, y);
-			// 	// graph()->lost = convert_img("images/youlost.xpm");
-			// 	// put_img(graph()->lost, x/2, y/2);
-			// }
 		}
 	}
 	if (count++ > player()->time_frame)
 	{
 		count = 0;
 		player()->frame = (player()->frame == 0);
-		// if (map()->enemy_x)
 		if (enemy()->x)
 			move_enemy();
 	}

@@ -6,7 +6,7 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 11:39:05 by ckojima-          #+#    #+#             */
-/*   Updated: 2023/08/29 22:03:29 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/29 23:44:40 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 # include <fcntl.h>
 # include <mlx.h>
 # include <stdio.h>
-# include <unistd.h>
 # include <time.h>
+# include <unistd.h>
 
 # define UP 65362
 # define DOWN 65364
@@ -42,9 +42,10 @@
 # define BLACK 0xFF000000
 
 # define IMG_WALL "images/water.xpm"
-# define IMG_COIN "images/sushi20.xpm"
-# define IMG_EXIT "images/box_open.xpm"
 # define IMG_FLOOR "images/white_floor.xpm"
+# define IMG_COIN "images/sushi20.xpm"
+# define IMG_EXIT_CLOSED "images/box_closed.xpm"
+# define IMG_EXIT_OPEN "images/box_open.xpm"
 
 # define IMG_PLAYER_D1 "images/cat_front1.xpm"
 # define IMG_PLAYER_D2 "images/cat_front2.xpm"
@@ -74,12 +75,11 @@ typedef enum e_direction
 
 typedef struct enemy //posso fazer um t_enemy * enemies[map()-> enemies]
 {
-	int			x;
-	int			y;
-	int			frame;
-	t_direction	dir;
+	int x;
+	int y;
+	int frame;
+	t_direction dir;
 }				t_enemy;
-
 
 typedef struct map
 {
@@ -90,13 +90,6 @@ typedef struct map
 	int			coins;
 	int			valid_coins;
 	int			valid_exit;
-	int			enemy_dir[2]; //
-	t_direction	en_dir; //
-	int			enemy_x; //
-	int			enemy_y; //
-	int			lost;
-	int			enemies_n; //number of enemies
-	t_enemy		*en_data[5]; //enemies data
 }				t_map;
 
 typedef struct player
@@ -105,7 +98,7 @@ typedef struct player
 	int			y;
 	int			steps;
 	int			frame;
-	int			time_frame; //maybe in graphics
+	int time_frame; //maybe in graphics
 	t_direction	dir;
 }				t_player;
 
@@ -117,10 +110,8 @@ typedef struct graphics
 	void		*background;
 	void		*coin;
 	void		*player[4][2];
-	void		*exit;
+	void		*exit[2];
 	void		*enemy[2];
-	void		*lost; // bg image for lost
-	void		*enemies[5][4][2]; // images of max 5 enemies
 }				t_graphics;
 
 // pointers
