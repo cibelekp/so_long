@@ -21,7 +21,6 @@ SOURCES			= srcs/main.c \
 				srcs/gameplay.c \
 				srcs/exit_cases.c \
 				srcs/aux.c
-# SOURCES_PATH = ./srcs/
 
 OBJECTS			:=$(SOURCES:.c=.o)
 CC				= cc
