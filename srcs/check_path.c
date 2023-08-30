@@ -6,7 +6,7 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 01:24:29 by ckojima-          #+#    #+#             */
-/*   Updated: 2023/08/30 01:24:32 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/30 17:01:26 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ void	mark_path(int x, int y)
 	}
 	if (map()->matrix[y][x] == '0')
 		map()->matrix[y][x] = 'o';
+	if (map()->matrix[y][x] == 'N')
+		map()->matrix[y][x] = 'n';
 	if (map()->matrix[y][x] == 'E')
 	{
 		map()->matrix[y][x] = 'e';
 		map()->valid_exit += 1;
 	}
-	if (map()->matrix[y][x] == 'N')
-		map()->matrix[y][x] = 'n';
 	else
 	{
 		check_path(x + 1, y);
