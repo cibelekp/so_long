@@ -6,16 +6,16 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 11:39:05 by ckojima-          #+#    #+#             */
-/*   Updated: 2023/08/30 00:28:25 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/30 01:45:14 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# include "./ft_printf/ft_printf.h"
-# include "./libft/libft.h"
-# include "./mod_gnl/get_next_line.h"
+# include "../ft_printf/ft_printf.h"
+# include "../libft/libft.h"
+# include "../mod_gnl/get_next_line.h"
 # include <fcntl.h>
 # include <mlx.h>
 # include <stdio.h>
@@ -35,7 +35,7 @@
 # define WHITE 0x00FFFFFF
 # define BLACK 0xFF000000
 
-# define IMG_WALL "images/kitchen_simple.xpm"
+# define IMG_WALL "images/water.xpm"
 # define IMG_FLOOR "images/white_floor.xpm"
 # define IMG_COIN "images/sushi20.xpm"
 # define IMG_EXIT_CLOSED "images/box_closed.xpm"
@@ -132,6 +132,6 @@ void			init_vars(void);
 void			*convert_img(char *img_path);
 void			put_img(void *img_address, int x, int y);
 
-void			move_enemy(void);
+void			move_enemy(int y_diff, int x_diff);
 
 #endif

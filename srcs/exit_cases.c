@@ -6,31 +6,23 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 16:08:40 by ckojima-          #+#    #+#             */
-/*   Updated: 2023/08/30 00:27:02 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/30 01:29:26 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	exit_game(char *msg)
+void	free_matrix(void)
 {
-	ft_printf(msg);
-	clean_mlx();
-	free_matrix();
-	if (map()->fd != -1)
-		close(map()->fd);
-	exit(EXIT_SUCCESS);
-}
+	int	i;
 
-void	fatal_error(char *msg, int line)
-{
-	ft_printf("Error\n");
-	ft_printf(msg, line);
-	clean_mlx();
-	free_matrix();
-	if (map()->fd != -1)
-		close(map()->fd);
-	exit(EXIT_FAILURE);
+	i = -1;
+	if (map()->matrix)
+	{
+		while (map()->matrix[++i])
+			free(map()->matrix[i]);
+		free(map()->matrix);
+	}
 }
 
 // cleanup, destroy images
@@ -59,17 +51,25 @@ void	clean_mlx(void)
 	}
 }
 
-void	free_matrix(void)
+int	exit_game(char *msg)
 {
-	int	i;
+	ft_printf(msg);
+	clean_mlx();
+	free_matrix();
+	if (map()->fd != -1)
+		close(map()->fd);
+	exit(EXIT_SUCCESS);
+}
 
-	i = -1;
-	if (map()->matrix)
-	{
-		while (map()->matrix[++i])
-			free(map()->matrix[i]);
-		free(map()->matrix);
-	}
+void	fatal_error(char *msg, int line)
+{
+	ft_printf("Error\n");
+	ft_printf(msg, line);
+	clean_mlx();
+	free_matrix();
+	if (map()->fd != -1)
+		close(map()->fd);
+	exit(EXIT_FAILURE);
 }
 
 // debug helper

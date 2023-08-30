@@ -11,10 +11,19 @@
 # **************************************************************************** #
 
 NAME			= so_long
-SOURCES			= so_long.c checkers.c graphics.c aux.c exit_cases.c gameplay.c
-# NAME			= TEST
-# SOURCES			= testmlx.c
-OBJECTS			= $(SOURCES:.c=.o)
+SOURCES			= srcs/main.c \
+				srcs/check_args.c \
+				srcs/check_map.c \
+				srcs/check_chars.c \
+				srcs/check_path.c \
+				srcs/start_game.c \
+				srcs/render_map.c \
+				srcs/gameplay.c \
+				srcs/exit_cases.c \
+				srcs/aux.c
+# SOURCES_PATH = ./srcs/
+
+OBJECTS			:=$(SOURCES:.c=.o)
 CC				= cc
 
 CFLAGS			= -Wall -Wextra -Werror -g

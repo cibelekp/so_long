@@ -6,7 +6,7 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 16:26:24 by ckojima-          #+#    #+#             */
-/*   Updated: 2023/08/30 00:26:39 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/30 01:19:14 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,8 @@ void	move_player(int x_diff, int y_diff, t_direction dir)
 	}
 }
 
-void	move_enemy(void)
+void	move_enemy(int y_diff, int x_diff)
 {
-	int	y_diff;
-	int	x_diff;
-
-	y_diff = 0;
-	x_diff = 0;
 	if (enemy()->dir == D_UP)
 		y_diff = -1;
 	if (enemy()->dir == D_DOWN)
