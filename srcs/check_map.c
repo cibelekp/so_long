@@ -6,7 +6,7 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 01:23:13 by ckojima-          #+#    #+#             */
-/*   Updated: 2023/08/30 01:23:16 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/31 19:46:11 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	check_map_size(int y)
 		{
 			if (map()->matrix[y][0] == '\n')
 			{
-				map()->height = y - 1;
+				map()->height = y;
 				break ;
 			}
 			fatal_error("Map is not retangular. Check line %d.\n", y + 1);
