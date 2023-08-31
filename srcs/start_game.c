@@ -6,7 +6,7 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 01:08:59 by ckojima-          #+#    #+#             */
-/*   Updated: 2023/08/30 01:46:47 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/08/31 21:34:38 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	start_game(t_graphics *temp)
 {
 	graph()->mlx = mlx_init();
 	temp->window = mlx_new_window(graph()->mlx, map()->width * 32, map()->height
-			* 32, "fat sushi island - the game");
+			* 32, "fat sushi island");
 	temp->wall = convert_img(IMG_WALL);
 	temp->background = convert_img(IMG_FLOOR);
 	temp->coin = convert_img(IMG_COIN);
