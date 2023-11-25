@@ -6,7 +6,7 @@
 /*   By: ckojima- <ckojima-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 16:26:24 by ckojima-          #+#    #+#             */
-/*   Updated: 2023/08/30 01:19:14 by ckojima-         ###   ########.fr       */
+/*   Updated: 2023/11/25 12:32:34 by ckojima-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,7 @@ void	move_player(int x_diff, int y_diff, t_direction dir)
 		&& map()->matrix[player()->y + y_diff][player()->x + x_diff] != 'e')
 	{
 		if (map()->matrix[player()->y + y_diff][player()->x + x_diff] == 'c')
-		{
 			map()->coins -= 1;
-			ft_printf("Coins: %d\n", map()->coins);
-		}
 		if (map()->matrix[player()->y + y_diff][player()->x + x_diff] == 'n'
 			|| map()->matrix[player()->y + y_diff][player()->x + x_diff] == 'N')
 			exit_game("You lost!\n");
